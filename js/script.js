@@ -107,3 +107,34 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// --- FUNÇÃO 3: FILTRO DE PROJETOS ---
+const filterInputs = document.querySelectorAll('.container_checkbox input');
+const projectCards = document.querySelectorAll('.card-project');
+
+filterInputs.forEach(input => {
+    input.addEventListener('change', () => {
+        if (input.checked) {
+            filterInputs.forEach(otherInput => {
+                if (otherInput !== input) {
+                    otherInput.checked = false;
+                }
+            });
+        } else {
+            input.checked = true;
+            return; 
+        }
+
+        const categoryToFilter = input.value;
+
+        projectCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+
+            if (categoryToFilter === 'all' || categoryToFilter === cardCategory) {
+                card.classList.remove('hide');
+            } else {
+                card.classList.add('hide');
+            }
+        });
+    });
+});

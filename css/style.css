@@ -273,10 +273,253 @@ header {
   width: 100%;
   height: 100vh;
   flex-direction: column;
-  gap: 250px;
   align-items: center;
   justify-content: center;
   display: flex;
+
+
+  .filters-container {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .container_checkbox {
+      --UnChacked-color: hsl(0, 0%, 83%);
+      --chacked-color: #cbb6fd;
+      --font-color: #000000;
+      --chacked-font-color: var(--font-color);
+      --anim-time: 0.2s;
+      --anim-scale: 0.1;
+      --base-radius: 4em;
+    }
+
+    .container_checkbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-size: 20px;
+      user-select: none;
+      fill: var(--font-color);
+      color: var(--font-color);
+    }
+
+    /* Hide the default checkbox */
+    .container_checkbox input {
+      display: none;
+    }
+
+    /* Base custom checkbox */
+    .checkmark {
+      background: var(--UnChacked-color);
+      border-radius: var(--base-radius);
+
+      display: flex;
+      padding: 0.5em;
+    }
+
+    .name {
+      margin: 0 0.25em;
+    }
+
+    .Yes {
+      width: 0;
+    }
+
+    .name.Yes {
+      display: none;
+    }
+
+    .container_checkbox:hover {
+      transform: scale(calc(1 + var(--anim-scale)));
+    }
+
+    .container_checkbox:active {
+      transform: scale(calc(1 - var(--anim-scale) / 2));
+      border-radius: calc(var(--base-radius) * 2);
+    }
+
+    .container_checkbox input:checked+.checkmark {
+      --UnChacked-color: var(--chacked-color);
+      fill: var(--chacked-font-color);
+      color: var(--chacked-font-color);
+    }
+
+    .container_checkbox,
+    .checkmark,
+    .checkmark:after,
+    .checkmark .name {
+      transition: all var(--anim-time);
+    }
+
+    /*Unuse*/
+    @keyframes boo {
+      80% {
+        transform: scale(1.4);
+      }
+
+      99% {
+        transform: scale(1.7);
+        border: 2px solid var(--UnChacked-color);
+      }
+
+      to {
+        transform: scale(0);
+      }
+    }
+
+
+  }
+
+  .projects-container {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .card_project {
+      width: 90%;
+      height: 33%;
+      border-radius: 30px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      color: var(--tertiary-color);
+    }
+  }
+
+  .itens-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .card-project {
+    width: 250px;
+    height: 200px;
+    border-radius: 15px;
+    background: rgba(148, 128, 128, 0.103);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+  }
+
+  .card-project::before {
+    content: "";
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 30%;
+    left: -20%;
+    transition: all .8s ease;
+    filter: blur(.5rem);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .text-card-project {
+    flex-grow: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    color: var(--tertiary-color);
+    font-weight: 900;
+    font-size: 1.2em;
+  }
+
+  .subtitle-card-project {
+    font-size: .6em;
+    font-weight: 300;
+    color: rgba(17, 24, 31, 0.691);
+  }
+
+  .icons-card-project {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 250px;
+    border-radius: 0px 0px 15px 15px;
+    overflow: hidden;
+  }
+
+  .btn-card-project {
+    border: none;
+    width: 84px;
+    height: 35px;
+    background-color: rgba(161, 155, 155, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+  }
+
+  .btn-card-project-space {
+    border: none;
+    width: 84px;
+    height: 35px;
+    background-color: rgba(161, 155, 155, 0.2);
+  }
+
+  .svg-icon-card-project {
+    width: 25px;
+    height: 25px;
+    stroke: rgb(12, 12, 12);
+  }
+
+  .btn-card-project:hover {
+    background-color: rgb(161, 154, 154);
+  }
+
+  .card-project.java::before {
+    background-image:
+      url('/assets/svg/java-16-svgrepo-com.svg'),
+      url('/assets/svg/dolphin-jumping-svgrepo-com.svg');
+    background-position: left center, right center;
+    background-repeat: no-repeat, no-repeat;
+    transition: all 0.8s ease;
+  }
+
+  .card-project.React::before {
+    background-image:
+      url('/assets/svg/react-svgrepo-com.svg'),
+      url('/assets/svg/expo-svgrepo-com.svg');
+    background-position: left center, right center;
+    background-repeat: no-repeat, no-repeat;
+    transition: all 0.8s ease;
+  }
+
+  .card-project:hover::before {
+
+    width: 35%;
+    /* importante para o posicionamento funcionar */
+    height: 30%;
+    top: 40%;
+    left: 60%;
+    filter: blur(0rem);
+    background-size: 30px 30px, 30px 30px;
+    /* reduz os ícones */
+    background-position: calc(60% - 30px) center, calc(50% + 10px) center;
+  }
+}
+
+/* O SEGREDO DO FILTRO: Esta classe esconde o item */
+.card-project.hide {
+  display: none;
 }
 
 .rodape {
