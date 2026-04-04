@@ -18,7 +18,1586 @@
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
   <style>
+    /* ============ RESET ============ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
+    html {
+      scroll-behavior: auto;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%
+    }
+
+    button {
+      appearance: none;
+      -webkit-appearance: none;
+      border: none;
+      background: none
+    }
+
+    .img-projeto {
+      width: 80%;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-left: 40px;
+    }
+
+    /* ============ TOKENS ============ */
+    :root {
+      --bg: #f7f7fb;
+      --bg2: #ffffff;
+      --surface: #ffffff;
+      --border: rgba(0, 0, 0, 0.07);
+      --border2: rgba(0, 0, 0, 0.12);
+      --accent: #4f44e0;
+      --accent-h: #3c33cc;
+      --accent-lt: rgba(79, 68, 224, 0.08);
+      --accent2: #e8446a;
+      --accent2-lt: rgba(232, 68, 106, 0.08);
+      --accent3: #17bf78;
+      --accent3-lt: rgba(23, 191, 120, 0.08);
+      --accent4: #9eb900;
+      --accent4-lt: rgba(143, 155, 34, 0.151);
+      --text: #0b0b19;
+      --muted: rgba(11, 11, 25, 0.50);
+      --muted2: rgba(11, 11, 25, 0.28);
+      --nav-bg: rgba(255, 255, 255, 0);
+      --nav-border: rgba(0, 0, 0, 0.08);
+      --sh-xs: 0 1px 3px rgba(0, 0, 0, .04), 0 2px 8px rgba(0, 0, 0, .04);
+      --sh-sm: 0 2px 8px rgba(0, 0, 0, .05), 0 4px 16px rgba(0, 0, 0, .05);
+      --sh-md: 0 4px 20px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .04);
+      --sh-lg: 0 8px 40px rgba(0, 0, 0, .09), 0 2px 8px rgba(0, 0, 0, .04);
+      --font-d: 'Syne', sans-serif;
+      --font-b: 'DM Sans', sans-serif;
+      --r: 18px;
+      --pill: 999px;
+    }
+
+    /* ============ BASE ============ */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-b);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media(hover:hover) and (pointer:fine) {
+      body {
+        cursor: none
+      }
+    }
+
+    /* ============ CURSOR ============ */
+    #cursor,
+    #cursor-ring {
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    #cursor {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      z-index: 10000;
+      mix-blend-mode: multiply;
+    }
+
+    #cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(79, 68, 224, 0.30);
+      border-radius: 50%;
+      z-index: 9999;
+    }
+
+    /* ============ NOISE do plano de fundo ============ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.02;
+    }
+
+    /* ============ BARRA DE PROGRESSO ============ */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 2001;
+      transform-origin: left;
+      transform: scaleX(0);
+      box-shadow: 0 0 6px rgba(79, 68, 224, .28);
+    }
+
+    /* ============ NAVBAR ============ */
+    #navbar {
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--nav-border);
+      border-radius: var(--pill);
+      padding: 8px 8px 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      box-shadow: var(--sh-md), 0 0 0 .5px rgba(255, 255, 255, .95) inset;
+      white-space: nowrap;
+      max-width: calc(100vw - 24px);
+      transition: box-shadow .4s ease, background .3s ease;
+    }
+
+    .nav-logo {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text);
+      letter-spacing: -.4px;
+      flex-shrink: 0;
+      margin-right: 4px;
+      text-decoration: none;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border2);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .nav-link {
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 11px;
+      border-radius: var(--pill);
+      transition: color .22s, background .22s;
+      cursor: none;
+    }
+
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(0, 0, 0, .058);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      margin-left: 6px;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--pill);
+      cursor: none;
+      flex-shrink: 0;
+      transition: background .25s, transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent-h);
+      transform: scale(1.05);
+      box-shadow: 0 4px 14px rgba(79, 68, 224, .35);
+    }
+
+    @media(max-width:620px) {
+
+      .nav-links,
+      .nav-divider {
+        display: none;
+      }
+
+      #navbar {
+        padding: 8px 8px 8px 14px;
+      }
+
+      .nav-cta {
+        margin-left: 0;
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+    }
+
+    /* ============ BASE DO SECTION ============ */
+    section {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(80px, 11vw, 130px) clamp(18px, 5vw, 64px) clamp(60px, 9vw, 100px);
+      overflow: hidden;
+    }
+
+    /* ============ TEXT ULTILITÁRIOS ============ */
+    .gradient-word {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .section-title {
+      font-family: var(--font-d);
+      font-size: clamp(30px, 4.6vw, 56px);
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -1.4px;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .section-sub {
+      font-size: clamp(15px, 1.8vw, 17px);
+      color: var(--muted);
+      line-height: 1.72;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .section-line {
+      width: 36px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin: 10px auto 0;
+    }
+
+    /* ============ HERO ============ */
+    #hero {
+      min-height: 120svh;
+      background:
+        radial-gradient(ellipse 80% 54% at 50% -4%, rgba(79, 68, 224, .11) 0%, transparent 68%),
+        radial-gradient(ellipse 38% 38% at 84% 58%, rgba(232, 68, 106, .07) 0%, transparent 62%),
+        var(--bg);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: clamp(240px, 50vw, 500px);
+      height: clamp(240px, 50vw, 500px);
+      background: rgba(79, 68, 224, .09);
+      top: -120px;
+      left: -60px;
+    }
+
+    .orb-2 {
+      width: clamp(160px, 30vw, 300px);
+      height: clamp(160px, 30vw, 300px);
+      background: rgba(232, 68, 106, .065);
+      bottom: -50px;
+      right: -30px;
+    }
+
+    .orb-3 {
+      width: clamp(130px, 22vw, 240px);
+      height: clamp(130px, 22vw, 240px);
+      background: rgba(23, 191, 120, .055);
+      top: 36%;
+      right: 6%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      border: 1px solid rgba(79, 68, 224, .18);
+      padding: 6px 14px;
+      border-radius: var(--pill);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 5px rgba(116, 81, 81, 0.6);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .3;
+        transform: scale(.55);
+      }
+    }
+
+    .hero-title {
+      font-family: var(--font-d);
+      font-size: clamp(44px, 5vw, 70px);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: clamp(-2px, -.026em, -3.5px);
+      text-align: center;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    .hero-title-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-title-inner {
+      display: block;
+      transform: translateY(110%);
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.9vw, 18px);
+      color: var(--muted);
+      max-width: 490px;
+      text-align: center;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .btn-primary {
+      padding: 13px 26px;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-b);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--pill);
+      cursor: none;
+      white-space: nowrap;
+      box-shadow: 0 5px 18px rgba(79, 68, 224, .28);
+      transition: background .25s, transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-h);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 9px 26px rgba(79, 68, 224, .38);
+    }
+
+    @media(hover:none) {
+
+      .btn-primary,
+      .btn-ghost,
+      .nav-cta {
+        cursor: pointer;
+      }
+    }
+
+    .btn-ghost {
+      padding: 22px 22px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font-b);
+      font-size: 15px;
+      font-weight: 400;
+      border: 1.5px solid var(--border2);
+      border-radius: var(--pill);
+      cursor: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color .22s, border-color .22s, background .22s;
+      white-space: nowrap;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: rgba(0, 0, 0, .18);
+      background: rgba(0, 0, 0, .025);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted2);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: scroll-bob 2.4s 2.5s infinite;
+    }
+
+    @keyframes scroll-bob {
+
+      0%,
+      100% {
+        opacity: .2;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        opacity: .55;
+        transform: translateX(-50%) translateY(5px);
+      }
+    }
+
+    .scroll-hint-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* ============ HELLO WORLD DO INíCIO ============ */
+    .contentHelloWorld {
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      animation: fadeIn 3s forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .mwg_effect000 .medias1 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      display: flex;
+      gap: 10px;
+    }
+
+    .mwg_effect000 .medias1 img {
+      width: 8vw;
+      height: 8vw;
+      object-fit: contain;
+      border-radius: 4%;
+      display: flex;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    .mwg_effect000 .medias {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      display: flex;
+      gap: 30px;
+
+    }
+
+    .mwg_effect000 .medias img {
+      width: 5;
+      height: 5vw;
+      object-fit: contain;
+      border-radius: 4%;
+      display: flex;
+      pointer-events: none;
+      will-change: transform;
+      margin-top: 15vh;
+
+    }
+
+    /* ============ SOBRE ============ */
+    #sobre {
+      background: var(--bg2);
+      padding-top: clamp(80px, 12vw, 140px);
+      padding-bottom: clamp(80px, 12vw, 140px);
+    }
+
+    .sobre-container {
+      width: 100%;
+      max-width: 1060px;
+    }
+
+    .sobre-header {
+      text-align: center;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media(max-width:860px) {
+      .sobre-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:520px) {
+      .sobre-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sobre-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: clamp(22px, 3.2vw, 32px) clamp(18px, 2.6vw, 26px);
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+      transition: border-color .28s, transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .28s;
+      opacity: 0;
+      transform: translateY(34px);
+    }
+
+    .sobre-card:hover {
+      border-color: rgba(79, 68, 224, .2);
+      transform: translateY(-4px);
+      box-shadow: var(--sh-md);
+    }
+
+    .sobre-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 55% at 50% 0%, rgba(79, 68, 224, .045) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity .38s;
+    }
+
+    .sobre-card:hover::before {
+      opacity: 1;
+    }
+
+    .sobre-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -65%;
+      width: 38%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+      transform: rotate(20deg);
+      transition: left .6s ease;
+      pointer-events: none;
+    }
+
+    .sobre-card:hover::after {
+      left: 125%;
+    }
+
+    .sobre-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent-lt);
+      border: 1px solid rgba(79, 68, 224, .14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      margin-bottom: 18px;
+    }
+
+    .sobre-card:nth-child(2) .sobre-icon {
+      background: var(--accent2-lt);
+      border-color: rgba(232, 68, 106, .14);
+    }
+
+    .sobre-card:nth-child(3) .sobre-icon {
+      background: var(--accent3-lt);
+      border-color: rgba(23, 191, 120, .14);
+    }
+
+    .sobre-title {
+      font-family: var(--font-d);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.4px;
+      margin-bottom: 9px;
+    }
+
+    .sobre-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.72;
+      font-weight: 300;
+    }
+
+    .sobre-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 10.5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      padding: 4px 10px;
+      border-radius: var(--pill);
+    }
+
+    /* ============ showcase ===================== recado pq não posso esquecer:
+   CHAVE: a seção usa display:block, sem padding,
+   overflow:visible para que o pin-spacer do GSAP
+   possa expandi-la exatamente para preencher a
+   distância de rolagem.
+   Nenhuma min-height extra é necessária — pinSpacing:true
+   cuida disso automaticamente.
+=============================================== */
+
+    #showcase {
+      display: block;
+      padding: 0;
+      overflow: visible;
+      background: var(--bg);
+    }
+
+    .showcase-sticky {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+      padding: clamp(60px, 9vw, 100px) 0 clamp(32px, 4.5vw, 48px);
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    .showcase-header {
+      text-align: center;
+      margin-bottom: clamp(24px, 4vw, 44px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 clamp(16px, 4vw, 32px);
+      flex-shrink: 0;
+    }
+
+    .carousel-track-wrap {
+      width: 100%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: clamp(10px, 1.6vw, 20px);
+      padding: 14px calc(50vw - clamp(130px, 24vw, 250px));
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex-shrink: 0;
+      width: 500px;
+      height: 300px;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--sh-sm);
+      transition: box-shadow .3s;
+    }
+
+    .carousel-slide:hover {
+      box-shadow: var(--sh-md);
+    }
+
+    .carousel-slide-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform .52s ease;
+    }
+
+    .carousel-slide:hover .carousel-slide-bg {
+      transform: scale(1.04);
+    }
+
+    .slide-1 .carousel-slide-bg {
+      background: linear-gradient(135deg, #17104a, #3424a0, #6c63ff);
+    }
+
+    .slide-2 .carousel-slide-bg {
+      background: linear-gradient(135deg, #e7e7e7, #e9e9e9, #ffffff);
+    }
+
+    .slide-3 .carousel-slide-bg {
+      background: linear-gradient(135deg, #350805, #ad0101, #dd3737);
+    }
+
+    .slide-4 .carousel-slide-bg {
+      background: linear-gradient(135deg, #0a303c, #1c806a, #80ffee);
+    }
+
+    .carousel-slide-content {
+      position: absolute;
+      bottom: 0.5px;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .65), transparent);
+    }
+
+    .slide-number {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .slide-title {
+      font-family: var(--font-d);
+      font-size: clamp(14px, 2vw, 19px);
+      font-weight: 700;
+      letter-spacing: -.4px;
+      color: #fff;
+    }
+
+    .slide-sub {
+      font-size: clamp(11px, 1.3vw, 13px);
+      color: rgba(255, 255, 255, .55);
+      margin-top: 3px;
+    }
+
+    .slide-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .22;
+    }
+
+    .slide-1 .slide-shape {
+      width: 165px;
+      height: 165px;
+      background: radial-gradient(circle, rgba(108, 99, 255, .9), transparent 70%);
+      top: -48px;
+      right: -48px;
+    }
+
+    .slide-2 .slide-shape {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(232, 68, 106, .9), transparent 70%);
+      top: -42px;
+      right: -36px;
+    }
+
+    .slide-3 .slide-shape {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(23, 191, 120, .9), transparent 70%);
+      top: -56px;
+      right: -56px;
+    }
+
+    .slide-4 .slide-shape {
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(146, 128, 255, .9), transparent 70%);
+      top: -36px;
+      right: -26px;
+    }
+
+    .slide-5 .slide-shape {
+      width: 158px;
+      height: 158px;
+      background: radial-gradient(circle, rgba(240, 154, 34, .9), transparent 70%);
+      top: -44px;
+      right: -44px;
+    }
+
+    .carousel-progress {
+      display: flex;
+      gap: 7px;
+      margin-top: clamp(18px, 2.8vw, 30px);
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border2);
+      transition: all .38s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .carousel-dot.active {
+      width: 22px;
+      background: var(--accent);
+      border-radius: var(--pill);
+    }
+
+    /* ============ Contatos ============ */
+    #cntt {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 42%, var(--bg) 100%);
+      padding-top: clamp(80px, 12vw, 140px);
+      padding-bottom: clamp(80px, 12vw, 140px);
+    }
+
+    .cntt-container {
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 6vw, 80px);
+      align-items: center;
+    }
+
+    @media(max-width:780px) {
+      .cntt-container {
+        grid-template-columns: 1fr;
+      }
+
+      .cntt-visual {
+        order: -1;
+      }
+    }
+
+    .cntt-visual {
+      position: relative;
+      height: clamp(310px, 42vw, 440px);
+    }
+
+    .cntt-card-main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #ede9ff, #ddd7ff);
+      border: 1.5px solid rgba(79, 68, 224, .1);
+      border-radius: 20px;
+      height: clamp(180px, 25vw, 280px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--sh-md);
+      opacity: 0;
+      transform: translateX(-36px) rotate(-1.8deg);
+    }
+
+    .cntt-card-main-inner {
+      font-family: var(--font-d);
+      font-size: clamp(52px, 9vw, 80px);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .cntt-stat-cards {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: clamp(14px, 2.4vw, 20px) clamp(12px, 2vw, 18px);
+      box-shadow: var(--sh-xs);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .stat-number {
+      font-family: var(--font-d);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      background: linear-gradient(135deg, var(--text), var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+
+    .cntt-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .cntt-text .section-label,
+    .cntt-text .section-title,
+    .cntt-text .section-sub {
+      text-align: left;
+    }
+
+    .cntt-text .section-sub {
+      max-width: 100%;
+    }
+
+    .cntt-list {
+      list-style: none;
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .cntt-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .cntt-list-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      box-shadow: 0 0 5px rgba(79, 68, 224, .4);
+    }
+
+    .cntt-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 28px;
+      padding: clamp(40px, 6.5vw, 72px) clamp(22px, 5vw, 56px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--sh-lg);
+      opacity: 0;
+      transform: translateY(32px) scale(.976);
+    }
+
+    .cntt-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 65% at 50% 0%, rgba(79, 68, 224, .055), transparent 70%);
+    }
+
+    .cntt-inner>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cntt-title {
+      font-family: var(--font-d);
+      font-size: clamp(26px, 4.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1.4px;
+      line-height: 1.06;
+      margin-bottom: 14px;
+    }
+
+    .cntt-sub {
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto 28px;
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--bg2);
+      border-top: 1.5px solid var(--border);
+      padding: clamp(20px, 3vw, 34px) clamp(18px, 5vw, 48px);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media(max-width:480px) {
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ============ AJUSTE ENTRE OS NAVEGADORES ============ */
+
+    /* Firefox: suporte incompleto ao backdrop-filter */
+    @supports not (backdrop-filter: blur(1px)) {
+      #navbar {
+        background: rgba(255, 255, 255, .96);
+      }
+    }
+
+    /* Fallback de texto com gradiente para versões antigas do Safari */
+    @supports not (-webkit-background-clip: text) {
+
+      .gradient-word,
+      .about-card-main-inner,
+      .stat-number {
+        color: var(--accent);
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+      }
+    }
+
+    /* Garante renderização consistente da fonte no Edge */
+    @media all and (-ms-high-contrast:none) {
+
+      .hero-title,
+      .section-title,
+      .cta-title {
+        letter-spacing: -1px;
+      }
+    }
+
+    /* ═══════════════ MODAL OVERLAY ═══════════════ */
+    #modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 8, 20, 0.58);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 4vw, 40px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .32s ease;
+    }
+
+    #modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ═══════════════ MODAL BOX ═══════════════ */
+    .modal-box {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .18), 0 4px 16px rgba(0, 0, 0, .08);
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(28px) scale(.96);
+      transition: transform .38s cubic-bezier(.34, 1.56, .64, 1), opacity .32s ease;
+      opacity: 0;
+      /* custom scrollbar */
+      scrollbar-width: thin;
+      scrollbar-color: var(--border2) transparent;
+    }
+
+    .modal-box::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .modal-box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modal-box::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 4px;
+    }
+
+    #modal-overlay.open .modal-box {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Modal header */
+    .modal-header {
+      padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 36px) 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      background: var(--bg2);
+      z-index: 1;
+      padding-bottom: 20px;
+      border-bottom: 1.5px solid var(--border);
+      z-index: 100;
+    }
+
+    .modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 100;
+
+    }
+
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      background: var(--accent-lt);
+      border: 1px solid rgba(79, 68, 224, .14);
+    }
+
+
+    .modal-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .modal-title {
+      font-family: var(--font-d);
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 800;
+      letter-spacing: -.6px;
+      line-height: 1.1;
+    }
+
+    .modal-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background .2s, color .2s, transform .2s;
+    }
+
+    .modal-close:hover {
+      background: var(--border);
+      color: var(--text);
+      transform: scale(1.08);
+    }
+
+    .modal-close svg {
+      pointer-events: none;
+    }
+
+    /* Tags row */
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 16px clamp(24px, 4vw, 36px) 0;
+    }
+
+    .modal-tag {
+      font-size: 10.5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: var(--pill);
+      color: var(--accent);
+      background: var(--accent-lt);
+    }
+
+    /* Modal body */
+    .modal-body {
+      padding: clamp(20px, 3.5vw, 32px) clamp(24px, 4vw, 36px) clamp(24px, 4vw, 36px);
+    }
+
+    /* ═══════════════ TIMELINE / LINHA DO TEMPO (MODAL) ═══════════════ */
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* linha vertical */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), rgba(79, 68, 224, .15));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 36px;
+      padding-top: 2px;
+    }
+
+    /* ponto */
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2.5px solid var(--bg2);
+      box-shadow: 0 0 0 2px rgba(79, 68, 224, .25);
+      flex-shrink: 0;
+      z-index: 1;
+      transition: transform .2s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.35);
+    }
+
+    /* conector abaixo do ponto (exceto o último) */
+    .timeline-connector {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(to bottom, rgba(79, 68, 224, .22), rgba(79, 68, 224, .06));
+      min-height: 12px;
+      margin-top: 2px;
+    }
+
+    .timeline-item:last-child .timeline-connector {
+      display: none;
+    }
+
+    /* card */
+    .timeline-card {
+      flex: 1;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: clamp(16px, 2.8vw, 22px) clamp(16px, 2.8vw, 22px);
+      margin-bottom: 14px;
+      margin-left: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, box-shadow .25s, transform .28s cubic-bezier(.34, 1.56, .64, 1);
+      cursor: default;
+    }
+
+    .timeline-card:hover {
+      border-color: rgba(79, 68, 224, .2);
+      box-shadow: var(--sh-sm);
+      transform: translateX(3px);
+    }
+
+    /* brilinho */
+    .timeline-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -65%;
+      width: 38%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+      transform: rotate(20deg);
+      transition: left .55s ease;
+      pointer-events: none;
+    }
+
+    .timeline-card:hover::after {
+      left: 125%;
+    }
+
+    .timeline-period {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-lt);
+      border: 1px solid rgba(79, 68, 224, .14);
+      padding: 3px 10px;
+      border-radius: var(--pill);
+      margin-bottom: 10px;
+    }
+
+    .timeline-period-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-card-title {
+      font-family: var(--font-d);
+      font-size: clamp(15px, 2vw, 17px);
+      font-weight: 700;
+      letter-spacing: -.35px;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .timeline-card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    /* status badge */
+    .timeline-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: var(--pill);
+      margin-top: 12px;
+    }
+
+    .timeline-status.done {
+      color: var(--accent3);
+      background: var(--accent3-lt);
+    }
+
+    .timeline-status.ongoing {
+      color: var(--accent4);
+      background: var(--accent4-lt);
+    }
+
+    .timeline-status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .timeline-status.ongoing .timeline-status-dot {
+      animation: pulse-dot 1.6s infinite;
+    }
+
+    /* ═══════════════ sobre CARD CLICKABLE ═══════════════ */
+    .sobre-card[data-modal] {
+      cursor: pointer;
+      padding-top: clamp(22px, 3.2vw, 32px);
+    }
+
+    @media(hover:none) {
+      .sobre-card[data-modal] {
+        cursor: pointer;
+      }
+    }
+
+    /* Arrow hint badge — top-right */
+    .sobre-card[data-modal]::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: var(--accent-lt);
+      border: 1.5px solid rgba(79, 68, 224, .18);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%234f44e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.5;
+      transition: opacity .25s, transform .3s cubic-bezier(.34, 1.56, .64, 1), background-color .22s, border-color .22s;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sobre-card[data-modal]:hover::before {
+      opacity: 1;
+      transform: scale(1.14) rotate(-44deg);
+      background-color: var(--accent);
+      border-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");
+    }
+
+    .sobre-card[data-modal]:hover {
+      box-shadow: var(--sh-md), 0 0 0 2.5px rgba(79, 68, 224, .07) inset;
+    }
+
+    /* sobre-tags wrapper */
+    .sobre-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    /* ═══════════════ CROSS-BROWSER FIXES ═══════════════ */
+    /* Firefox: no backdrop-filter support fully */
+    @supports not (backdrop-filter: blur(1px)) {
+      #navbar {
+        background: rgba(255, 255, 255, .96);
+      }
+    }
+
+    /* Old Safari gradient text fallback */
+    @supports not (-webkit-background-clip: text) {
+
+      .gradient-word,
+      .about-card-main-inner,
+      .stat-number {
+        color: var(--accent);
+        background: none !important;
+        -webkit-text-fill-color: unset !important;
+      }
+    }
+
+    /* Ensure consistent font rendering in Edge */
+    @media all and (-ms-high-contrast:none) {
+
+      .hero-title,
+      .section-title,
+      .cta-title {
+        letter-spacing: -1px;
+      }
+    }
   </style>
 </head>
 
@@ -249,7 +1828,8 @@
               </div>
             </div>
           </a>
-          <a href="https://github.com/DevGuiAfonso/Xocolite" target="_blank" aria-label="Projeto: Xocolite" data-project="Xocolite" rel="noopener noreferrer">
+          <a href="https://github.com/DevGuiAfonso/Xocolite" target="_blank" aria-label="Projeto: Xocolite"
+            data-project="Xocolite" rel="noopener noreferrer">
             <div class="carousel-slide slide-2">
               <div class="carousel-slide-bg"></div>
               <div class="slide-shape" aria-hidden="true"></div>
@@ -261,7 +1841,8 @@
               </div>
             </div>
           </a>
-          <a href="https://github.com/DevGuiAfonso/VersaoFinalProjetoA3" target="_blank" aria-label="Projeto: CRUD Java" data-project="CRUD Java" rel="noopener noreferrer">
+          <a href="https://github.com/DevGuiAfonso/VersaoFinalProjetoA3" target="_blank" aria-label="Projeto: CRUD Java"
+            data-project="CRUD Java" rel="noopener noreferrer">
             <div class="carousel-slide slide-3">
               <div class="carousel-slide-bg"></div>
               <div class="slide-shape" aria-hidden="true"></div>
@@ -272,7 +1853,8 @@
               </div>
             </div>
           </a>
-          <a href="https://github.com/DevGuiAfonso/Dagogo" target="_blank" aria-label="Projeto: Dagogo" data-project="Dagogo" rel="noopener noreferrer">
+          <a href="https://github.com/DevGuiAfonso/Dagogo" target="_blank" aria-label="Projeto: Dagogo"
+            data-project="Dagogo" rel="noopener noreferrer">
             <div class="carousel-slide slide-4">
               <div class="carousel-slide-bg"></div>
               <div class="slide-shape" aria-hidden="true"></div>
@@ -442,8 +2024,603 @@
   </div>
 
   <!-- ═══════════════ SCRIPTS ═══════════════ -->
-  <script src="/Js/App.js"></script>
-  <script src="/Js/hw.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+      /* ── Lenis smooth scroll ── */
+      var lenis = new Lenis({
+        duration: 1.12,
+        easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        smoothWheel: !isTouch,
+        touchMultiplier: isTouch ? 2 : 1,
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+      /* ── Customização do cursor do mouse ── */
+      if (!isTouch) {
+        var cur = document.getElementById('cursor');
+        var ring = document.getElementById('cursor-ring');
+        cur.style.display = 'block';
+        ring.style.display = 'block';
+        var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+        var rx = mx, ry = my;
+        window.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
+        (function tick() {
+          cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+          rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11;
+          ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+          requestAnimationFrame(tick);
+        })();
+        document.querySelectorAll('a,button').forEach(function (el) {
+          el.addEventListener('mouseenter', function () { gsap.to(cur, { width: 18, height: 18, duration: .16 }); });
+          el.addEventListener('mouseleave', function () { gsap.to(cur, { width: 10, height: 10, duration: .16 }); });
+        });
+      } else {
+        document.querySelectorAll('a,button').forEach(function (el) { el.style.cursor = 'pointer'; });
+      }
+
+      /* ── barra de progreço no topo do site ── */
+      gsap.to('#progress-bar', {
+        scaleX: 1, ease: 'none',
+        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: true }
+      });
+
+      /* ── Hero entrance ── */
+      gsap.timeline({ delay: .18 })
+        .to('.hero-eyebrow', { opacity: 1, y: 0, duration: .58, ease: 'power3.out' })
+        .to('.hero-title-inner', { y: '0%', duration: .86, stagger: .1, ease: 'power4.out' }, '-=.28')
+        .to('.hero-sub', { opacity: 1, y: 0, duration: .68, ease: 'power3.out' }, '-=.4')
+        .to('.hero-actions', { opacity: 1, y: 0, duration: .68, ease: 'power3.out' }, '-=.4')
+        .to('.scroll-hint', { opacity: 1, duration: .5 }, '-=.1');
+
+      /* ── Navbar section sync ── */
+      var navLinks = document.querySelectorAll('.nav-link');
+      function setActive(id) {
+        navLinks.forEach(function (l) { l.classList.remove('active'); });
+        var a = document.querySelector('.nav-link[data-section="' + id + '"]');
+        if (a) a.classList.add('active');
+      }
+      document.querySelectorAll('section[id]').forEach(function (sec) {
+        ScrollTrigger.create({
+          trigger: sec, start: 'top 52%', end: 'bottom 52%',
+          onEnter: function () { setActive(sec.id); },
+          onEnterBack: function () { setActive(sec.id); },
+        });
+      });
+      navLinks.forEach(function (l) {
+        l.addEventListener('click', function (e) {
+          e.preventDefault();
+          var t = document.getElementById(l.dataset.section);
+          if (t) lenis.scrollTo(t, { duration: 1.26, offset: 0 });
+        });
+      });
+      document.getElementById('navCta').addEventListener('click', function () {
+        lenis.scrollTo(document.getElementById('cntt'), { duration: 1.26 });
+      });
+
+      /* Navbar scroll shadow */
+      ScrollTrigger.create({
+        start: 'top -40',
+        onEnter: function () { gsap.to('#navbar', { boxShadow: '0 8px 32px rgba(0,0,0,.10)', duration: .4 }); },
+        onLeaveBack: function () { gsap.to('#navbar', { boxShadow: '0 4px 20px rgba(0,0,0,.07)', duration: .4 }); },
+      });
+
+      /* ── Sobre ── */
+      gsap.timeline({ scrollTrigger: { trigger: '#sobre', start: 'top 74%' } })
+        .to('#sobre .section-label', { opacity: 1, y: 0, duration: .56, ease: 'power3.out' })
+        .to('#sobre .section-title', { opacity: 1, y: 0, duration: .66, ease: 'power3.out' }, '-=.26')
+        .to('.sobre-card', { opacity: 1, y: 0, duration: .66, stagger: .11, ease: 'power3.out' }, '-=.26');
+
+      /* ── Showcase header ── */
+      gsap.timeline({ scrollTrigger: { trigger: '#showcase', start: 'top 75%' } })
+        .to('#showcase-label', { opacity: 1, y: 0, duration: .56, ease: 'power3.out' })
+        .to('#showcase-title', { opacity: 1, y: 0, duration: .66, ease: 'power3.out' }, '-=.26');
+
+
+
+      /* ══════════════════════════════════════════ Recado para mim mesmo para não esquecer:
+     CARROSSEL — fixo (pin) + rolagem (scrub), sem espaços
+    
+     O espaço do “spacer” é eliminado por:
+     1. #showcase usa display:block, sem padding/overflow:hidden
+     2. pinSpacing:true → o pin-spacer do GSAP ajusta automaticamente
+        à distância de rolagem
+     3. end() retorna exatamente (slideW + gap) × (n-1), de modo que
+        a altura do spacer == a rolagem consumida, sem sobra
+    ══════════════════════════════════════════ */
+      var track = document.getElementById('carouselTrack');
+      var slides = Array.from(track.querySelectorAll('.carousel-slide'));
+      var dots = Array.from(document.querySelectorAll('.carousel-dot'));
+
+      function getGap() {
+        var cs = getComputedStyle(track);
+        return parseFloat(cs.gap || cs.columnGap) || 16;
+      }
+      function scrollDist() {
+        if (!slides[0]) return 0;
+        return (slides[0].offsetWidth + getGap()) * (slides.length - 1);
+      }
+      function styleSlides() {
+        var cx = window.innerWidth / 2;
+        slides.forEach(function (s) {
+          var rc = s.getBoundingClientRect();
+          var dist = Math.abs((rc.left + rc.width * 0.5) - cx);
+          var r = Math.max(0, 1 - dist / (window.innerWidth * 0.52));
+          gsap.set(s, {
+            scale: 0.84 + r * 0.16,
+            filter: 'brightness(' + (0.48 + r * 0.52) + ')',
+            transformOrigin: 'center center',
+          });
+        });
+      }
+      function updateDots(p) {
+        var idx = Math.round(p * (slides.length - 1));
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+      }
+
+      ScrollTrigger.create({
+        trigger: '#showcase',
+        start: 'top top',
+        end: function () { return '+=' + scrollDist(); },
+        pin: '.showcase-sticky',
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 0.9,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          track.style.transform = 'translateX(' + (-scrollDist() * self.progress) + 'px)';
+          updateDots(self.progress);
+          styleSlides();
+        },
+        onRefresh: function () {
+          track.style.transform = 'translateX(0px)';
+          setTimeout(styleSlides, 80);
+        },
+      });
+      setTimeout(styleSlides, 180);
+
+      /* ── Contatos ── */
+      gsap.timeline({ scrollTrigger: { trigger: '#cntt', start: 'top 65%' } })
+        .to('#cntt .section-label', { opacity: 1, y: 0, duration: .56, ease: 'power3.out' })
+        .to('#cntt .section-title', { opacity: 1, y: 0, duration: .66, ease: 'power3.out' }, '-=.26')
+        .to('#cntt .section-sub', { opacity: 1, y: 0, duration: .66, ease: 'power3.out' }, '-=.26')
+        .to('.cntt-card-main', { opacity: 1, x: 0, rotation: 0, duration: .82, ease: 'power3.out' }, '-=.44')
+        .to('.stat-card', { opacity: 1, y: 0, duration: .56, stagger: .09, ease: 'power3.out' }, '-=.44')
+        .to('.cntt-list', { opacity: 1, y: 0, duration: .56, ease: 'power3.out' }, '-=.3');
+
+      /* Stat counters */
+      document.querySelectorAll('.stat-number[data-target]').forEach(function (el) {
+        var target = parseFloat(el.dataset.target);
+        var isFloat = target % 1 !== 0;
+        ScrollTrigger.create({
+          trigger: el, start: 'top 88%', once: true,
+          onEnter: function () {
+            var obj = { v: 0 };
+            gsap.to(obj, {
+              v: target, duration: 1.8, ease: 'power2.out',
+              onUpdate: function () {
+                el.textContent = isFloat
+                  ? obj.v.toFixed(1)
+                  : Math.round(obj.v) + (target >= 100 ? '+' : '');
+              }
+            });
+          }
+        });
+      });
+
+      /* ── CTTS ── */
+      gsap.to('.cntt-inner', {
+        opacity: 1, y: 0, scale: 1, duration: .8, ease: 'power3.out',
+        scrollTrigger: { trigger: '#cntt', start: 'top 72%' }
+      });
+
+      /* ── Hero orb parallax ── */
+      [['orb-1', -90], ['orb-2', -64], ['orb-3', -46]].forEach(function (pair) {
+        gsap.to('.' + pair[0], {
+          y: pair[1], ease: 'none',
+          scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+      });
+
+      /* ══════════════════════════════════════════
+         MODAL — iformações da timeline
+      ══════════════════════════════════════════ */
+      var MODAL_DATA = {
+        eu: {
+          title: 'Eu',
+          label: 'Trajetória Pessoal',
+          tags: ['Clique e arraste para scrollar a modal'],
+          tagColors: [],
+          timeline: [
+            {
+              period: '2013 → 2019',
+              title: 'Início da Jornada',
+              desc: 'Meu primeiro contato com tecnologia foi ainda criança, porque minha família tinha uma lan house. Eu vivia naquele ambiente, mexendo em tudo, fuçando os computadores, mas era mais curiosidade do que qualquer outra coisa.A vontade real de aprender programação veio quando tentei criar um mod para Minecraft — não deu certo, mas foi justamente essa tentativa frustrada que me fez querer entender de verdade como as coisas funcionavam.',
+              status: 'done'
+            },
+            {
+              period: '2020 → Dez 2022',
+              title: 'Primeiros Passos',
+              desc: 'Na pandemia, com mais tempo livre, comecei a ir mais a fundo. Parei de só usar e fui tentar entender o que estava por trás das coisas. Eu ficava me perguntando como os softwares funcionavam e por que parecia tão complicado fazer até um simples “Hello World”. Foi aí que dei meu primeiro passo mais sério.',
+              status: 'done'
+            },
+            {
+              period: 'Ago 2023 → Dez 2024',
+              title: 'Primeiro Contato Formal com Desenvolvimento de SoftWare',
+              desc: 'Depois de terminar o ensino médio, entrei na Etec no curso técnico de Desenvolvimento de Sistemas. Ali eu tive um choque de realidade — percebi que sabia muito menos do que imaginava. Mas, ao invés de me desanimar, isso me deu mais vontade ainda de aprender. Nesse período, também atuei como assistente técnico dos professores, ajudando na manutenção e configuração dos desktops da escola.Isso me colocou mais próximo da parte prática e me fez aprender na marra a resolver problemas reais. Foi aí que comecei a mudar minha forma de estudar e a levar isso com mais foco, já pensando em trabalhar na área.',
+              status: 'done'
+            },
+            {
+              period: 'Fev 2025 → Jul 2025',
+              title: 'Evolução Nos Estudos',
+              desc: 'Assim que terminei o técnico, já fui atrás da faculdade. Fiquei um tempo em dúvida sobre qual curso escolher, até encontrar Ciência da Computação. Quando vi a grade, fez total sentido pra mim. Mas entrando lá, veio outro choque: de novo percebi que ainda tinha muito chão pela frente — e isso só aumentou minha vontade de evoluir.',
+              status: 'done'
+            },
+            {
+              period: 'Ago 2025 → Presente',
+              title: 'Entrando ',
+              desc: 'Depois do primeiro semestre, comecei a procurar minha primeira oportunidade. Mandei currículo pra todo lado até aparecer uma chance inesperada: virar professor de robótica. No começo achei que nem fazia sentido tentar, ainda mais vendo que tinha gente bem mais experiente concorrendo. Mesmo assim, fui. Fiz a entrevista, dei o meu melhor… e consegui. Hoje, trabalho como professor de robótica.',
+              status: 'ongoing'
+            },
+            {
+              period: '2027',
+              title: 'Futuro Proximo',
+              desc: 'Eu gosto muito de ensinar, mas sei que quero crescer ainda mais. Meu objetivo é entrar de vez na área de programação, seja back-end ou front-end — gosto dos dois. Agora o foco é continuar evoluindo até chegar lá.',
+              status: 'ongoing'
+            },
+          ]
+        },
+        academico: {
+          title: 'Acadêmico',
+          label: 'Formação & Estudos',
+          tags: ['Clique e arraste para scrollar a modal'],
+          tagColors: [{ color: 'var(--accent2)', bg: 'var(--accent2-lt)' }],
+          timeline: [
+            {
+              period: 'Ago 2023 → Dez 2024',
+              title: 'Técnico - Desenvolvimento de Sistemas (ETEC)',
+              desc: 'Foi aqui que tive meu primeiro contato formal com diversas áreas da tecnologia, incluindo programação, redes, desenvolvimento front-end e back-end, design e banco de dados.',
+              status: 'done'
+            },
+            {
+              period: 'Fev 2025 → Dez 2025',
+              title: 'Graduação - semipresencial (Ciência da Computação) — 1º Ano (São Judas)',
+              desc: 'Ingresso na faculdade de Ciência da Computação. Disciplinas de algoritmos, lógica, Java e estrutura de dados — base teórica aprofundada.',
+              status: 'done'
+            },
+            {
+              period: 'Fev 2026 → Dez 2026',
+              title: 'Graduação - semipresencial (Ciência da Computação) — 2º Ano (São Judas)',
+              desc: 'Foco em engenharia de software, interfaces e sistemas distribuídos. Iniciação científica sobre acessibilidade em interfaces web.',
+              status: 'ongoing'
+            },
+          ]
+        },
+        carreira: {
+          title: 'Carreira',
+          label: 'Experiência Profissional',
+          tags: ['Clique e arraste para scrollar a modal'],
+          tagColors: [{ color: 'var(--accent3)', bg: 'var(--accent3-lt)' }],
+          timeline: [
+            {
+              period: 'Ago 2024 → Dez 2024',
+              title: 'Assistente técnico (Não remunerado)',
+              desc: 'Atuação informal como assistente técnico, oferecendo suporte a alunos e professores. Responsável pela manutenção de computadores, instalação e configuração de softwares, além da preparação de ambientes de desenvolvimento utilizando Visual Studio Code e C#, auxiliando também na resolução de problemas técnicos.',
+              status: 'done'
+            },
+            {
+              period: 'Ago 2025 → Atuando',
+              title: 'Professor de Robótica',
+              desc: 'Atuo como professor de robótica, conduzindo aulas teóricas e práticas com foco em programação, eletrônica e automação. Através de projetos com microcontroladores, sensores e atuadores, desenvolvo não apenas habilidades técnicas, mas também o pensamento lógico, a criatividade, o trabalho em equipe e a responsabilidade dos alunos.',
+              status: 'ongoing'
+            },
+          ]
+        }
+      };
+
+      var overlay = document.getElementById('modal-overlay');
+      var modalBox = document.getElementById('modalBox');
+      var modalClose = document.getElementById('modalClose');
+      var modalIcon = document.getElementById('modalIcon');
+      var modalLabel = document.getElementById('modalLabel');
+      var modalTitle = document.getElementById('modal-title-text');
+      var modalTags = document.getElementById('modalTags');
+      var modalTl = document.getElementById('modalTimeline');
+
+      function buildTimeline(items) {
+        return items.map(function (item, i) {
+          var statusClass = item.status === 'done' ? 'done' : 'ongoing';
+          var statusLabel = item.status === 'done' ? 'Concluído' : 'Em andamento';
+          return [
+            '<div class="timeline-item">',
+            '<div class="timeline-left">',
+            '<div class="timeline-dot"></div>',
+            '<div class="timeline-connector"></div>',
+            '</div>',
+            '<div class="timeline-card">',
+            '<div class="timeline-period"><span class="timeline-period-dot"></span>' + item.period + '</div>',
+            '<div class="timeline-card-title">' + item.title + '</div>',
+            '<p class="timeline-card-desc">' + item.desc + '</p>',
+            '<div class="timeline-status ' + statusClass + '"><span class="timeline-status-dot"></span>' + statusLabel + '</div>',
+            '</div>',
+            '</div>'
+          ].join('');
+        }).join('');
+      }
+
+      function buildTags(tags, colors) {
+        return tags.map(function (tag, i) {
+          navCta
+          var c = colors && colors[i];
+          var style = c ? ' style="color:' + c.color + ';background:' + c.bg + '"' : '';
+          return '<span class="modal-tag"' + style + '>' + tag + '</span>';
+        }).join('');
+      }
+
+      function openModal(key) {
+        var d = MODAL_DATA[key];
+        if (!d) return;
+
+        /* populate */
+        modalIcon.textContent = d.icon;
+        modalLabel.textContent = d.label;
+        modalTitle.textContent = d.title;
+        modalTags.innerHTML = buildTags(d.tags, d.tagColors);
+        modalTl.innerHTML = buildTimeline(d.timeline);
+
+        /* lock body scroll — but keep native scroll working inside modal-box */
+        var scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.overflowY = 'scroll';
+        document.body.dataset.scrollY = scrollY;
+        lenis.stop();
+
+        /* show */
+        overlay.classList.add('open');
+        modalBox.scrollTop = 0;
+
+        /* animate timeline items in */
+        var cards = modalTl.querySelectorAll('.timeline-card');
+        var dots = modalTl.querySelectorAll('.timeline-dot');
+        gsap.fromTo(cards,
+          { opacity: 0, x: -16 },
+          { opacity: 1, x: 0, duration: .48, stagger: .09, ease: 'power3.out', delay: .18 }
+        );
+        gsap.fromTo(dots,
+          { scale: 0 },
+          { scale: 1, duration: .36, stagger: .09, ease: 'back.out(2)', delay: .18 }
+        );
+      }
+
+      function closeModal() {
+        var scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflowY = '';
+        window.scrollTo(0, scrollY);
+        lenis.start();
+        overlay.classList.remove('open');
+      }
+
+      /* ── Para scrollar clicando na modal (mouse + touch) ── */
+      (function () {
+        var el = modalBox;
+        var isDragging = false;
+        var startY = 0;
+        var startScroll = 0;
+        var velY = 0;
+        var lastY = 0;
+        var lastT = 0;
+        var rafId = null;
+        var DRAG_THRESHOLD = 4; /* px — abaixo disso = não arrasta */
+        var didDrag = false;
+
+        function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+        /* momentum loop */
+        function momentum() {
+          velY *= 0.88;
+          el.scrollTop += velY;
+          if (Math.abs(velY) > 0.5) {
+            rafId = requestAnimationFrame(momentum);
+          } else {
+            velY = 0;
+          }
+        }
+
+        /* ── MOUSE ── */
+        el.addEventListener('mousedown', function (e) {
+          /* only main button, ignore clicks on interactive children */
+          if (e.button !== 0) return;
+          if (e.target.closest('a, button')) return;
+          isDragging = true;
+          didDrag = false;
+          startY = e.clientY;
+          startScroll = el.scrollTop;
+          lastY = e.clientY;
+          lastT = Date.now();
+          velY = 0;
+          cancelAnimationFrame(rafId);
+          el.style.cursor = 'grabbing';
+          el.style.userSelect = 'none';
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          var dy = e.clientY - startY;
+          if (Math.abs(dy) > DRAG_THRESHOLD) didDrag = true;
+          if (!didDrag) return;
+
+          /* velocity */
+          var now = Date.now();
+          var dt = now - lastT || 16;
+          velY = (lastY - e.clientY) / dt * 14;
+          lastY = e.clientY;
+          lastT = now;
+
+          el.scrollTop = startScroll - dy;
+        });
+
+        window.addEventListener('mouseup', function (e) {
+          if (!isDragging) return;
+          isDragging = false;
+          el.style.cursor = '';
+          el.style.userSelect = '';
+          if (didDrag) {
+            /* kick off momentum */
+            rafId = requestAnimationFrame(momentum);
+            /* prevent the mouseup from bubbling as a click to the overlay */
+            e.stopPropagation();
+          }
+        });
+
+        /* suppress click-on-overlay-close when user was dragging */
+        el.addEventListener('click', function (e) {
+          if (didDrag) { e.stopPropagation(); didDrag = false; }
+        }, true);
+
+        /* ── TOUCH (extra inertia layer on top of native) ── */
+        var touchStartY = 0;
+        var touchLastY = 0;
+        var touchLastT = 0;
+        var touchVelY = 0;
+        var touchStartScroll = 0;
+
+        el.addEventListener('touchstart', function (e) {
+          var t = e.touches[0];
+          touchStartY = t.clientY;
+          touchLastY = t.clientY;
+          touchLastT = Date.now();
+          touchStartScroll = el.scrollTop;
+          touchVelY = 0;
+          cancelAnimationFrame(rafId);
+        }, { passive: true });
+
+        el.addEventListener('touchmove', function (e) {
+          var t = e.touches[0];
+          var now = Date.now();
+          var dt = now - touchLastT || 16;
+          touchVelY = (touchLastY - t.clientY) / dt * 14;
+          touchLastY = t.clientY;
+          touchLastT = now;
+        }, { passive: true });
+
+        el.addEventListener('touchend', function () {
+          velY = touchVelY;
+          rafId = requestAnimationFrame(momentum);
+        }, { passive: true });
+
+      })();
+
+      /* open on card click / keyboard */
+      document.querySelectorAll('.sobre-card[data-modal]').forEach(function (card) {
+        card.addEventListener('click', function () { openModal(card.dataset.modal); });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card.dataset.modal); }
+        });
+      });
+
+      /* close on overlay click */
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      modalClose.addEventListener('click', closeModal);
+
+      /* close on Escape */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      });
+
+      /* ── Resize + orientation ── */
+      var rt;
+      function onResize() {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          ScrollTrigger.refresh(true);
+          setTimeout(styleSlides, 100);
+        }, 200);
+      }
+      window.addEventListener('resize', onResize);
+      window.addEventListener('orientationchange', function () { setTimeout(onResize, 350); });
+    })();
+  </script>
+
+  <script>
+    !function (t, e) { "object" == typeof exports && "undefined" != typeof module ? e(exports) : "function" == typeof define && define.amd ? define(["exports"], e) : e((t = t || self).window = t.window || {}) }(this, function (e) { "use strict"; function m() { return i || "undefined" != typeof window && (i = window.gsap) } function p(t) { return c(t).id } function q(t) { return f[p("string" == typeof t ? g(t)[0] : t)] } function r(t) { var e, r = o; if (.05 <= t - s) for (s = t; r;)((e = r.g(r.t, r.p)) !== r.v1 || .2 < t - r.t1) && (r.v2 = r.v1, r.v1 = e, r.t2 = r.t1, r.t1 = t), r = r._next } function t() { (i = m()) && (g = i.utils.toArray, n = i.utils.getUnit, c = i.core.getCache, a = i.ticker, l = 1) } function u(t, e, r, i) { this.t = t, this.p = e, this.g = t._gsap.get, this.rCap = v[r || n(this.g(t, e))], this.v1 = this.v2 = 0, this.t1 = this.t2 = a.time, i && ((this._next = i)._prev = this) } var i, l, g, n, o, a, s, c, f = {}, v = { deg: 360, rad: 2 * Math.PI }, d = function () { function VelocityTracker(e, r) { l || t(), this.target = g(e)[0], (f[p(this.target)] = this)._props = {}, r && this.add(r) } VelocityTracker.register = function register(e) { i = e, t() }; var e = VelocityTracker.prototype; return e.get = function get(t, e) { var r, i, n = this._props[t] || console.warn("Not tracking " + t + " velocity."); return r = parseFloat(e ? n.v1 : n.g(n.t, n.p)) - parseFloat(n.v2), (i = n.rCap) && (r %= i) !== r % (i / 2) && (r = r < 0 ? r + i : r - i), function _round(t) { return Math.round(1e4 * t) / 1e4 }(r / ((e ? n.t1 : a.time) - n.t2)) }, e.getAll = function getAll() { var t, e = {}, r = this._props; for (t in r) e[t] = this.get(t); return e }, e.isTracking = function isTracking(t) { return t in this._props }, e.add = function add(t, e) { t in this._props || (o || (a.add(r), s = a.time), o = this._props[t] = new u(this.target, t, e, o)) }, e.remove = function remove(t) { var e, i, n = this._props[t]; n && (e = n._prev, i = n._next, e && (e._next = i), i ? i._prev = e : o === n && (a.remove(r), o = 0), delete this._props[t]) }, e.kill = function kill(t) { for (var e in this._props) this.remove(e); t || delete f[p(this.target)] }, VelocityTracker.track = function track(e, r, i) { l || t(); for (var n, o, a = [], s = g(e), c = r.split(","), u = (i || "").split(","), f = s.length; f--;) { for (n = q(s[f]) || new VelocityTracker(s[f]), o = c.length; o--;)n.add(c[o], u[o] || u[0]); a.push(n) } return a }, VelocityTracker.untrack = function untrack(t, e) { var r = (e || "").split(","); g(t).forEach(function (t) { var e = q(t); e && (r.length ? r.forEach(function (t) { return e.remove(t) }) : e.kill(1)) }) }, VelocityTracker.isTracking = function isTracking(t, e) { var r = q(t); return r && r.isTracking(e) }, VelocityTracker.getVelocity = function getVelocity(t, e) { var r = q(t); return r && r.isTracking(e) ? r.get(e) : console.warn("Not tracking velocity of " + e) }, VelocityTracker }(); d.getByTarget = q, m() && i.registerPlugin(d); function L() { return h || "undefined" != typeof window && (h = window.gsap) && h.registerPlugin && h } function N(t) { return "number" == typeof t } function O(t) { return "object" == typeof t } function P(t) { return "function" == typeof t } function S(t) { return t } function W(t) { return Math.round(1e4 * t) / 1e4 } function X(t, e, r) { for (var i in e) i in t || i === r || (t[i] = e[i]); return t } function Y(t) { var e, r, i = {}; for (e in t) i[e] = O(r = t[e]) && !I(r) ? Y(r) : r; return i } function Z(t, e, r, i, n) { var o, a, s, c, u = e.length, f = 0, l = R; if (O(t)) { for (; u--;) { for (s in o = e[u], a = 0, t) a += (c = o[s] - t[s]) * c; a < l && (f = u, l = a) } if ((n || R) < R && n < Math.sqrt(l)) return t } else for (; u--;)(a = (o = e[u]) - t) < 0 && (a = -a), a < l && i <= o && o <= r && (f = u, l = a); return e[f] } function $(t, e, r, i, n, o, a) { if ("auto" === t.end) return t; var s, c, u = t.end; if (r = isNaN(r) ? R : r, i = isNaN(i) ? -R : i, O(e)) { if (s = e.calculated ? e : (P(u) ? u(e, a) : Z(e, u, r, i, o)) || e, !e.calculated) { for (c in s) e[c] = s[c]; e.calculated = !0 } s = s[n] } else s = P(u) ? u(e, a) : I(u) ? Z(e, u, r, i, o) : parseFloat(u); return r < s ? s = r : s < i && (s = i), { max: s, min: s, unitFactor: t.unitFactor } } function _(t, e, r) { return isNaN(t[e]) ? r : +t[e] } function aa(t, e) { return .05 * e * t / T } function ba(t, e, r) { return Math.abs((e - t) * T / r / .05) } function da(t, e, r, i) { if (e.linkedProps) { var n, o, a, s, c, u, f = e.linkedProps.split(","), l = {}; for (n = 0; n < f.length; n++)(a = e[o = f[n]]) && (s = N(a.velocity) ? a.velocity : (c = c || B(t)) && c.isTracking(o) ? c.get(o) : 0, u = Math.abs(s / _(a, "resistance", i)), l[o] = parseFloat(r(t, o)) + aa(s, u)); return l } } function fa() { (h = L()) && (y = h.parseEase, F = h.utils.toArray, b = h.utils.getUnit, A = h.core.getCache, E = h.utils.clamp, C = h.core.getStyleSaver, w = h.core.reverting || function () { }, k = y("power3"), T = k(.05), M = h.core.PropTween, h.config({ resistance: 100, unitFactors: { time: 1e3, totalTime: 1e3, progress: 1e3, totalProgress: 1e3 } }), V = h.config(), h.registerPlugin(d), x = 1) } var h, x, y, F, k, V, b, M, A, T, E, j, C, w, B = d.getByTarget, I = Array.isArray, R = 1e10, U = { resistance: 1, checkpoint: 1, preventOvershoot: 1, linkedProps: 1, radius: 1, duration: 1 }, D = { version: "3.12.7", name: "inertia", register: function register(t) { h = t, fa() }, init: function init(t, e, r, i, n) { x || fa(); var o = B(t); if ("auto" === e) { if (!o) return void console.warn("No inertia tracking on " + t + ". InertiaPlugin.track(target) first."); e = o.getAll() } this.styles = C && "object" == typeof t.style && C(t), this.target = t, this.tween = r, j = e; var a, s, c, u, f, l, p, g, v, d = t._gsap, h = d.get, y = e.duration, m = O(y), k = e.preventOvershoot || m && 0 === y.overshoot, T = _(e, "resistance", V.resistance), w = N(y) ? y : function _calculateTweenDuration(t, e, r, i, n, o) { if (void 0 === r && (r = 10), void 0 === i && (i = .2), void 0 === n && (n = 1), void 0 === o && (o = 0), function _isString(t) { return "string" == typeof t }(t) && (t = F(t)[0]), !t) return 0; var a, s, c, u, f, l, p, g, v, d, h = 0, y = R, m = e.inertia || e, k = A(t).get, T = _(m, "resistance", V.resistance); for (a in d = da(t, m, k, T), m) U[a] || (s = m[a], O(s) || ((g = g || B(t)) && g.isTracking(a) ? s = N(s) ? { velocity: s } : { velocity: g.get(a) } : (u = +s || 0, c = Math.abs(u / T))), O(s) && (u = N(s.velocity) ? s.velocity : (g = g || B(t)) && g.isTracking(a) ? g.get(a) : 0, c = E(i, r, Math.abs(u / _(s, "resistance", T))), l = (f = parseFloat(k(t, a)) || 0) + aa(u, c), "end" in s && (s = $(s, d && a in d ? d : l, s.max, s.min, a, m.radius, u), o && (j === e && (j = m = Y(e)), m[a] = X(s, m[a], "end"))), "max" in s && l > +s.max + 1e-10 ? (v = s.unitFactor || V.unitFactors[a] || 1, (p = f > s.max && s.min !== s.max || -15 < u * v && u * v < 45 ? i + .1 * (r - i) : ba(f, s.max, u)) + n < y && (y = p + n)) : "min" in s && l < s.min - 1e-10 && (v = s.unitFactor || V.unitFactors[a] || 1, (p = f < s.min && s.min !== s.max || -45 < u * v && u * v < 15 ? i + .1 * (r - i) : ba(f, s.min, u)) + n < y && (y = p + n)), h < p && (h = p)), h < c && (h = c)); return y < h && (h = y), r < h ? r : h < i ? i : h }(t, e, m && y.max || 10, m && y.min || .2, m && "overshoot" in y ? +y.overshoot : k ? 0 : 1, !0); for (a in e = j, j = 0, v = da(t, e, h, T), e) U[a] || (s = e[a], P(s) && (s = s(i, t, n)), N(s) ? f = s : O(s) && !isNaN(s.velocity) ? f = +s.velocity : o && o.isTracking(a) ? f = o.get(a) : console.warn("ERROR: No velocity was defined for " + t + " property: " + a), l = aa(f, w), g = 0, c = h(t, a), u = b(c), c = parseFloat(c), O(s) && (p = c + l, "end" in s && (s = $(s, v && a in v ? v : p, s.max, s.min, a, e.radius, f)), "max" in s && +s.max < p ? k || s.preventOvershoot ? l = s.max - c : g = s.max - c - l : "min" in s && +s.min > p && (k || s.preventOvershoot ? l = s.min - c : g = s.min - c - l)), this._props.push(a), this.styles && this.styles.save(a), this._pt = new M(this._pt, t, a, c, 0, S, 0, d.set(t, a, this)), this._pt.u = u || 0, this._pt.c1 = l, this._pt.c2 = g); return r.duration(w), 1 }, render: function render(t, e) { var r = e._pt; if ((t = k(e.tween._time / e.tween._dur)) || !w()) for (; r;)r.set(r.t, r.p, W(r.s + r.c1 * t + r.c2 * t * t) + r.u, r.d, t), r = r._next; else e.styles.revert() } }; "track,untrack,isTracking,getVelocity,getByTarget".split(",").forEach(function (t) { return D[t] = d[t] }), L() && h.registerPlugin(D), e.InertiaPlugin = D, e.VelocityTracker = d, e.default = D; if (typeof (window) === "undefined" || window !== e) { Object.defineProperty(e, "__esModule", { value: !0 }) } else { delete e.default } });
+
+    // parte do hello world que se mexe ao passar o mouse
+    window.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(InertiaPlugin)
+
+      let oldX = 0,
+        oldY = 0,
+        deltaX = 0,
+        deltaY = 0
+
+      const root = document.querySelector('.mwg_effect000')
+      root.addEventListener("mousemove", (e) => {
+        // Calculato horizontal movimento do mouse em cime do item
+        deltaX = e.clientX - oldX;
+
+        // Calculate vertical movimento do mouse em cime do item
+        deltaY = e.clientY - oldY;
+
+        // Update das cordenadas antigas
+        oldX = e.clientX;
+        oldY = e.clientY;
+      })
+
+      root.querySelectorAll('.media').forEach(el => {
+
+        el.addEventListener('mouseenter', () => {
+
+          const tl = gsap.timeline({
+            onComplete: () => {
+              tl.kill()
+            }
+          })
+          tl.timeScale(1.2) // Animation 20% faster normal
+
+          const image = el.querySelector('img')
+          tl.to(image, {
+            inertia: {
+              x: {
+                velocity: deltaX * 30, // amplificador de movime
+                end: 0 // volta a posisão de inicio 
+              },
+              y: {
+                velocity: deltaY * 30, // amplificador de movime
+                end: 0 // volta a posisão de inicio
+              },
+            },
+          })
+          tl.fromTo(image, {
+            rotate: 0
+          }, {
+            duration: 0.4,
+            rotate: (Math.random() - 0.5) * 30, // Returns -15 & 15
+            yoyo: true,
+            repeat: 1,
+            ease: 'power1.inOut' // serve para deixar a animação mais suave
+          }, '<') // Means that the animation starts at the same time as the previous tween
+        })
+      })
+    })
+
+  </script>
 </body>
 
 </html>
