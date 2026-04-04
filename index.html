@@ -1,335 +1,449 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animationOfGhost.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f8fc">
+  <title>Portfólio do Guilherme Afonso</title>
+  <link rel="stylesheet" href="Css/Styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+
+  </style>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="container">
-                <div class="tabs">
-                    <input type="radio" id="radio-1" name="tabs" checked>
-                    <label class="tab" for="radio-1" data-target="#initial">INÍCIO</label>
 
-                    <input type="radio" id="radio-2" name="tabs">
-                    <label class="tab" for="radio-2" data-target="#apresentacao">APRESENTAÇÃO</label>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="progress-bar"></div>
 
-                    <input type="radio" id="radio-3" name="tabs">
-                    <label class="tab" for="radio-3" data-target="#projetos">PROJETOS</label>
+  <!-- === NAVBAR === -->
+  <nav id="navbar" role="navigation" aria-label="Menu principal">
+    <a href="#hero" class="nav-logo">GuiAfonso</a>
+    <div class="nav-divider" aria-hidden="true"></div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link active" data-section="hero">Início</a>
+      <a href="#sobre" class="nav-link" data-section="sobre">sobre</a>
+      <a href="#showcase" class="nav-link" data-section="showcase">Showcase</a>
+    </div>
+    <button class="nav-cta" id="navCta">Contatos</button>
+  </nav>
 
-                    <input type="radio" id="radio-4" name="tabs">
-                    <label class="tab" for="radio-4" data-target="#contato">CONTATOS</label>
+  <!-- === HERO === -->
+  <section id="hero">
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
 
-                    <span class="glider"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+      ultima atualização — 03/2026
+    </div>
 
-    <main class="panel">
-        <section id="initial" class="initial">
-
-
-            <div class="card-welcome">
-                <div class="loader-welcome">
-                    <h1 style="margin-top: 0px;font-size: 25px;font-weight: 300;">seja </h1>
-                    <div class="words-welcome">
-                        <span class="word-welcome"></span>
-                        <span class="word-welcome">bem-vindo</span>
-                        <span class="word-welcome">ようこそ</span>
-                        <span class="word-welcome">Welcome</span>
-                        <span class="word-welcome">환영합니다 </span>
-                        <span class="word-welcome">Benvenuto</span>
-                    </div>
-                    <h1 style="margin-top: 0px; font-size: 25px; font-weight: 300;">ao meu portfólio</h1>
-                </div>
-            </div>
+    <h1 class="hero-title">
+      <span class="hero-title-line"><span class="hero-title-inner">Seja</span></span>
+      <span class="hero-title-line"><span class="hero-title-inner"><span
+            class="gradient-word">Bem-vindo</span></span></span>
+    </h1>
 
 
-
-            <div class="content">
-                <section class="mwg_effect000 ">
-                    <div class="medias">
-                        <div class="media"></div>
-                        <div class="media"><img src="assets/media/h.png" alt="Imagem da Letra H"></div>
-                        <div class="media"><img src="assets/media/E.png" alt="Imagem da Letra E"></div>
-                        <div class="media"><img src="assets/media/LL.png" alt="Imagem da Letra L"></div>
-                        <div class="media"><img src="assets/media/lll.png" alt="Imagem da Letra L"></div>
-                        <div class="media"><img src="assets/media/o.png" alt="Imagem da Letra O"></div>
-                    </div>
-
-                    <div class="medias1">
-                        <div class="media"><img src="assets/media/W.png" alt="Imagem da Letra W"></div>
-                        <div class="media"><img src="assets/media/OO.png" alt="Imagem da Letra O"></div>
-                        <div class="media"><img src="assets/media/r.png" alt="Imagem da Letra R"></div>
-                        <div class="media"><img src="assets/media/lllll.png" alt="Imagem da Letra L"></div>
-                        <div class="media"><img src="assets/media/D.png" alt="Imagem da Letra D"></div>
-                    </div>
-                </section>
-            </div>
-        </section>
-
-        <section id="apresentacao" class="apresentacao">
-
-        </section>
-
-        <!--Parte dos projetos -->
-        <section id="projetos" class="projetos">
-
-            <div class="filters-container"> <!-- Div responsável por organizar os filtros-->
-
-                <label class="container_checkbox"><!-- Filtro que mostra todos os itens-->
-                    <input type="checkbox" value="all" checked />
-                    <div class="checkmark">
-                        <p class="No name">all</p>
-                        <p class="Yes name">ALL</p>
-                    </div>
-                </label>
-
-                <label class="container_checkbox"><!-- Filtro que mostra apenas os itens de desktop-->
-                    <input type="checkbox" value="desktop" />
-                    <div class="checkmark">
-                        <p class="No name">desktop</p>
-                        <p class="Yes name">DESKTOP</p>
-                    </div>
-                </label>
-
-                <label class="container_checkbox"><!-- Filtro que mostra apenas os itens de mobile-->
-                    <input type="checkbox" value="mobile" />
-                    <div class="checkmark">
-                        <p class="No name">mobile</p>
-                        <p class="Yes name">MOBILE</p>
-                    </div>
-                </label>
-            </div>
-
-            <div class="projects-container"><!-- Div responsável por organizar os cards dos projetos-->
-
-                <div class="card-project" data-category="desktop">
-                    <div class="text-card-project">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <p class="subtitle-card-project">Vivamus nisi purus</p>
-                    </div>
-                    <div class="icons-card-project">
-                        <a class="btn-card-project" href="https://github.com/DevGuiAfonso/VersaoFinalProjetoA3">
-                            <svg width="30px" height="64px" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M9.29183 21V18.4407L9.3255 16.6219C9.36595 16.0561 9.58639 15.5228 9.94907 15.11C9.95438 15.1039 9.95972 15.0979 9.9651 15.0919C9.9791 15.0763 9.96988 15.0511 9.94907 15.0485V15.0485C7.52554 14.746 5.0005 13.7227 5.0005 9.26749C4.9847 8.17021 5.3427 7.10648 6.00437 6.27215C6.02752 6.24297 6.05103 6.21406 6.07492 6.18545V6.18545C6.10601 6.1482 6.11618 6.09772 6.10194 6.05134C6.10107 6.04853 6.10021 6.04571 6.09935 6.04289C6.0832 5.9899 6.06804 5.93666 6.05388 5.88321C5.81065 4.96474 5.86295 3.98363 6.20527 3.09818C6.20779 3.09164 6.21034 3.08511 6.2129 3.07858C6.22568 3.04599 6.25251 3.02108 6.28698 3.01493V3.01493C6.50189 2.97661 7.37036 2.92534 9.03298 4.07346C9.08473 4.10919 9.13724 4.14609 9.19053 4.18418V4.18418C9.22901 4.21168 9.27794 4.22011 9.32344 4.20716C9.32487 4.20675 9.32631 4.20634 9.32774 4.20593C9.41699 4.18056 9.50648 4.15649 9.59617 4.1337C11.1766 3.73226 12.8234 3.73226 14.4038 4.1337C14.4889 4.1553 14.5737 4.17807 14.6584 4.20199C14.6602 4.20252 14.6621 4.20304 14.6639 4.20356C14.7174 4.21872 14.7749 4.20882 14.8202 4.17653V4.17653C14.8698 4.14114 14.9187 4.10679 14.967 4.07346C16.6257 2.92776 17.4894 2.9764 17.7053 3.01469V3.01469C17.7404 3.02092 17.7678 3.04628 17.781 3.07946C17.7827 3.08373 17.7843 3.08799 17.786 3.09226C18.1341 3.97811 18.1894 4.96214 17.946 5.88321C17.9315 5.93811 17.9159 5.9928 17.8993 6.04723V6.04723C17.8843 6.09618 17.8951 6.14942 17.9278 6.18875C17.9289 6.18998 17.9299 6.19121 17.9309 6.19245C17.9528 6.21877 17.9744 6.24534 17.9956 6.27215C18.6573 7.10648 19.0153 8.17021 18.9995 9.26749C18.9995 13.747 16.4565 14.7435 14.0214 15.015V15.015C14.0073 15.0165 14.001 15.0334 14.0105 15.0439C14.0141 15.0479 14.0178 15.0519 14.0214 15.0559C14.2671 15.3296 14.4577 15.6544 14.5811 16.0103C14.7101 16.3824 14.7626 16.7797 14.7351 17.1754V21"
-                                        stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                    <path
-                                        d="M4 17C4.36915 17.0523 4.72159 17.1883 5.03065 17.3975C5.3397 17.6068 5.59726 17.8838 5.7838 18.2078C5.94231 18.4962 6.15601 18.7504 6.41264 18.9557C6.66927 19.161 6.96379 19.3135 7.27929 19.4043C7.59478 19.4952 7.92504 19.5226 8.25112 19.485C8.5772 19.4475 8.89268 19.3457 9.17946 19.1855"
-                                        stroke="#323232" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                </g>
-                            </svg>
-                        </a>
-                        <a class="btn-card-project-space">
-                        </a>
-                        <a class="btn-card-project" href="#">
-                            <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100"
-                                preserveAspectRatio="xMidYMid meet" height="100" class="svg-icon-card-project">
-                                <path stroke-width="8" stroke-linejoin="round" stroke-linecap="round" fill="none"
-                                    d="M21.9,50h0M50,50h0m28.1,0h0M25.9,50a4,4,0,1,1-4-4A4,4,0,0,1,25.9,50ZM54,50a4,4,0,1,1-4-4A4,4,0,0,1,54,50Zm28.1,0a4,4,0,1,1-4-4A4,4,0,0,1,82.1,50Z">
-                                </path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-
-            </div>
-        </section>
-    </main>
-    <footer id="contato" data-target="#contato" class="rodape"><!-- Rodapé-->
-        <div class="top_footer">
-
-            <p>OBRIGADO POR TER CHEGADO ATÉ AQUI! SE QUISER ENTRAR EM <span style="color: #956afa;">CONTATO</span>,
-                CLIQUE NOS íCONES ABAIXO:</p>
-
-        </div><!--Mensagem do rodapé-->
-        <div class="main_footer"><!-- Div responsável por organizar a parte principal do rodapé-->
-            <div class="animation"><!-- Div responsável por organizar a parte de da animação do fantasma-->
-                <div id="ghost" class="ghost-container"> <!-- De coração do fantasma do Pacman-->
-                    <div id="roxo">
-                        <div id="pupil"></div>
-                        <div id="pupil1"></div>
-                        <div id="eye"></div>
-                        <div id="eye1"></div>
-                        <div id="top0"></div>
-                        <div id="top1"></div>
-                        <div id="top2"></div>
-                        <div id="top3"></div>
-                        <div id="top4"></div>
-                        <div id="st0"></div>
-                        <div id="st1"></div>
-                        <div id="st2"></div>
-                        <div id="st3"></div>
-                        <div id="st4"></div>
-                        <div id="st5"></div>
-                        <div id="an1"></div>
-                        <div id="an2"></div>
-                        <div id="an3"></div>
-                        <div id="an4"></div>
-                        <div id="an5"></div>
-                        <div id="an6"></div>
-                        <div id="an7"></div>
-                        <div id="an8"></div>
-                        <div id="an9"></div>
-                        <div id="an10"></div>
-                        <div id="an11"></div>
-                        <div id="an12"></div>
-                        <div id="an13"></div>
-                        <div id="an14"></div>
-                        <div id="an15"></div>
-                        <div id="an16"></div>
-                        <div id="an17"></div>
-                        <div id="an18"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="content-contact"> <!-- Div responsável por organizar a parte de contatos-->
-                <div class="card-contact">
-                    <section class="links">
-                        <ul class="contact-list">
-                            <li class="icon-content">
-                                <a href="https://wa.me/5511912939683?text=Olá%20Gui,%20vi%20seu%20portfólio%20e%20quero%20conversar!"
-                                    target="_blank" aria-label="WhatsApp" data-social="WhatsApp" class="link">
-                                    <svg width="64px" height="64px" viewBox="0 0 20 20" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        fill="currentColor">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <title>whatsapp [#128]</title>
-                                            <desc>Created with Sketch.</desc>
-                                            <defs> </defs>
-                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                                                fill-rule="evenodd">
-                                                <g id="Dribbble-Light-Preview"
-                                                    transform="translate(-300.000000, -7599.000000)"
-                                                    fill="currentColor">
-                                                    <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                        <path
-                                                            d="M259.821,7453.12124 C259.58,7453.80344 258.622,7454.36761 257.858,7454.53266 C257.335,7454.64369 256.653,7454.73172 254.355,7453.77943 C251.774,7452.71011 248.19,7448.90097 248.19,7446.36621 C248.19,7445.07582 248.934,7443.57337 250.235,7443.57337 C250.861,7443.57337 250.999,7443.58538 251.205,7444.07952 C251.446,7444.6617 252.034,7446.09613 252.104,7446.24317 C252.393,7446.84635 251.81,7447.19946 251.387,7447.72462 C251.252,7447.88266 251.099,7448.05372 251.27,7448.3478 C251.44,7448.63589 252.028,7449.59418 252.892,7450.36341 C254.008,7451.35771 254.913,7451.6748 255.237,7451.80984 C255.478,7451.90987 255.766,7451.88687 255.942,7451.69881 C256.165,7451.45774 256.442,7451.05762 256.724,7450.6635 C256.923,7450.38141 257.176,7450.3464 257.441,7450.44643 C257.62,7450.50845 259.895,7451.56477 259.991,7451.73382 C260.062,7451.85686 260.062,7452.43903 259.821,7453.12124 M254.002,7439 L253.997,7439 L253.997,7439 C248.484,7439 244,7443.48535 244,7449 C244,7451.18666 244.705,7453.21526 245.904,7454.86076 L244.658,7458.57687 L248.501,7457.3485 C250.082,7458.39482 251.969,7459 254.002,7459 C259.515,7459 264,7454.51465 264,7449 C264,7443.48535 259.515,7439 254.002,7439"
-                                                            id="whatsapp-[#128]"> </path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </a>
-                                <div class="tooltip">WhatsApp</div>
-                            </li>
-                            <li class="icon-content">
-                                <a href="https://github.com/DevGuiAfonso" target="_blank" aria-label="Github"
-                                    data-social="Github" class="link">
-                                    <svg width="64px" height="64px" viewBox="0 0 20 20" version="1.1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        fill="currentColor">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <title>github [#142]</title>
-                                            <desc>Created with Sketch.</desc>
-                                            <defs> </defs>
-                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                                                fill-rule="evenodd">
-                                                <g id="Dribbble-Light-Preview"
-                                                    transform="translate(-140.000000, -7559.000000)"
-                                                    fill="currentColor">
-                                                    <g id="icons" transform="translate(56.000000, 160.000000)">
-                                                        <path
-                                                            d="M94,7399 C99.523,7399 104,7403.59 104,7409.253 C104,7413.782 101.138,7417.624 97.167,7418.981 C96.66,7419.082 96.48,7418.762 96.48,7418.489 C96.48,7418.151 96.492,7417.047 96.492,7415.675 C96.492,7414.719 96.172,7414.095 95.813,7413.777 C98.04,7413.523 100.38,7412.656 100.38,7408.718 C100.38,7407.598 99.992,7406.684 99.35,7405.966 C99.454,7405.707 99.797,7404.664 99.252,7403.252 C99.252,7403.252 98.414,7402.977 96.505,7404.303 C95.706,7404.076 94.85,7403.962 94,7403.958 C93.15,7403.962 92.295,7404.076 91.497,7404.303 C89.586,7402.977 88.746,7403.252 88.746,7403.252 C88.203,7404.664 88.546,7405.707 88.649,7405.966 C88.01,7406.684 87.619,7407.598 87.619,7408.718 C87.619,7412.646 89.954,7413.526 92.175,7413.785 C91.889,7414.041 91.63,7414.493 91.54,7415.156 C90.97,7415.418 89.522,7415.871 88.63,7414.304 C88.63,7414.304 88.101,7413.319 87.097,7413.247 C87.097,7413.247 86.122,7413.234 87.029,7413.87 C87.029,7413.87 87.684,7414.185 88.139,7415.37 C88.139,7415.37 88.726,7417.2 91.508,7416.58 C91.513,7417.437 91.522,7418.245 91.522,7418.489 C91.522,7418.76 91.338,7419.077 90.839,7418.982 C86.865,7417.627 84,7413.783 84,7409.253 C84,7403.59 88.478,7399 94,7399"
-                                                            id="github-[#142]"> </path>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </a>
-                                <div class="tooltip">Github</div>
-                            </li>
-                            <li class="icon-content">
-
-                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dev.guilherme.afonso@gmail.com&su=Email vindo do Portfólio&body=Olá%20Gui,%20gostaria%20de%20falar%20sobre..."
-                                    target="_blank" aria-label="Gmail" data-social="Gmail" class="link">
-                                    <svg height="64px" width="64px" version="1.1" id="_x32_"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        viewBox="0 0 512 512" xml:space="preserve" fill="currentColor">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <style type="text/css">
-                                                .st0 {
-                                                    fill: currentColor;
-                                                }
-                                            </style>
-                                            <g>
-                                                <path class="st0"
-                                                    d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345 c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345 C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203 c3.497,8.26,8.653,15.734,14.926,22.001c1.59,1.586,3.169,3.044,4.892,4.494c12.286,10.175,28.145,16.32,45.319,16.32h369.958 c17.18,0,33.108-6.145,45.323-16.384c1.718-1.386,3.305-2.844,4.891-4.43c6.27-6.267,11.425-13.741,14.994-22.001v-0.064 c3.769-8.653,5.812-18.171,5.812-28.138V126.087C512,121.399,511.543,116.762,510.678,112.275z M46.509,101.571 c6.345-6.338,14.866-10.175,24.512-10.175h369.958c9.646,0,18.242,3.837,24.512,10.175c1.122,1.129,2.179,2.387,3.112,3.637 L274.696,274.203c-5.348,4.687-11.954,7.002-18.696,7.002c-6.674,0-13.276-2.315-18.695-7.002L43.472,105.136 C44.33,103.886,45.387,102.7,46.509,101.571z M36.334,385.92V142.735L176.658,265.15L36.405,387.435 C36.334,386.971,36.334,386.449,36.334,385.92z M440.979,420.597H71.021c-6.281,0-12.158-1.651-17.174-4.552l147.978-128.959 l13.815,12.018c11.561,10.046,26.028,15.134,40.36,15.134c14.406,0,28.872-5.088,40.432-15.134l13.808-12.018l147.92,128.959 C453.137,418.946,447.26,420.597,440.979,420.597z M475.666,385.92c0,0.529,0,1.051-0.068,1.515L335.346,265.221L475.666,142.8 V385.92z">
-                                                </path>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </a>
-                                <div class="tooltip">Email</div>
-                            </li>
-                            <li class="icon-content">
-                                <a href="https://www.linkedin.com/in/guilherme-afonso-de-araújo-35b935333"
-                                    aria-label="linkedin" data-social="linkedin" class="link">
-                                    <svg width="64px" height="64px" viewBox="0 0 24 24"
-                                        id="meteor-icon-kit__solid-linkedin" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                        </g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M22.2857 0H1.70893C0.766071 0 0 0.776786 0 1.73036V22.2696C0 23.2232 0.766071 24 1.70893 24H22.2857C23.2286 24 24 23.2232 24 22.2696V1.73036C24 0.776786 23.2286 0 22.2857 0ZM7.25357 20.5714H3.69643V9.11786H7.25893V20.5714H7.25357ZM5.475 7.55357C4.33393 7.55357 3.4125 6.62679 3.4125 5.49107C3.4125 4.35536 4.33393 3.42857 5.475 3.42857C6.61071 3.42857 7.5375 4.35536 7.5375 5.49107C7.5375 6.63214 6.61607 7.55357 5.475 7.55357ZM20.5875 20.5714H17.0304V15C17.0304 13.6714 17.0036 11.9625 15.1821 11.9625C13.3286 11.9625 13.0446 13.4089 13.0446 14.9036V20.5714H9.4875V9.11786H12.9V10.6821H12.9482C13.425 9.78214 14.5875 8.83393 16.3179 8.83393C19.9179 8.83393 20.5875 11.2071 20.5875 14.2929V20.5714Z"
-                                                fill="currentColor"></path>
-                                        </g>
-                                    </svg>
-                                </a>
-                                <div class="tooltip">linkedin</div>
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="download">
-                        <p>SE QUISER, PODE BAIXAR MEU <span style="color: #774cdb;">CURRÍCULO</span>:</p>
-                        <button class="Btn">
-                            <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z">
-                                </path>
-                            </svg>
-                            <span class="icon2"></span>
-                        </button>
-                    </section>
-                </div>
-            </div>
+    <div class="contentHelloWorld" id="teste">
+      <section class="mwg_effect000 ">
+        <div class="medias">
+          <div class="media"></div>
+          <div class="media"><img src="assets/media/h.png" alt="Imagem da Letra H"></div>
+          <div class="media"><img src="assets/media/E.png" alt="Imagem da Letra E"></div>
+          <div class="media"><img src="assets/media/LL.png" alt="Imagem da Letra L"></div>
+          <div class="media"><img src="assets/media/lll.png" alt="Imagem da Letra L"></div>
+          <div class="media"><img src="assets/media/o.png" alt="Imagem da Letra O"></div>
         </div>
-        <div class="copyright">
 
+        <div class="medias1">
+          <div class="media"><img src="assets/media/W.png" alt="Imagem da Letra W"></div>
+          <div class="media"><img src="assets/media/OO.png" alt="Imagem da Letra O"></div>
+          <div class="media"><img src="assets/media/r.png" alt="Imagem da Letra R"></div>
+          <div class="media"><img src="assets/media/lllll.png" alt="Imagem da Letra L"></div>
+          <div class="media"><img src="assets/media/D.png" alt="Imagem da Letra D"></div>
         </div>
-    </footer>
+      </section>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    <script src="/js/script.js"></script>
+
+    <div class="scroll-hint" aria-hidden="true">
+      Role para explorar
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- === SOBRE === -->
+  <section id="sobre">
+    <div class="sobre-container">
+      <div class="sobre-header">
+        <span class="section-label">Resumo</span>
+        <h2 class="section-title">Um pouco<br>sobre mim</h2>
+        <span class="section-label">Clique nos cards abaixo para acessar minhas TimeLines</span>
+
+        <div class="section-line" aria-hidden="true"></div>
+      </div>
+      <div class="sobre-grid">
+        <div class="sobre-card" data-modal="eu" role="button" tabindex="0" aria-haspopup="dialog"
+          aria-label="Ver linha do tempo: Eu">
+          <div class="sobre-icon" aria-hidden="true">
+
+            <!-- Icone de Pessoa-->
+            <svg width="30px" height="30px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g clip-path="url(#clip0_901_3019)">
+                  <path
+                    d="M24 31H8H1C1 31 1.69 27.38 2 26C2.21 25.08 3 23 11 22C11 22 12 25 16 25C20 25 21 22 21 22C29 23 29.79 25.02 30 26C30.29 27.38 31 31 31 31H24Z"
+                    fill="#d84dff"></path>
+                  <path d="M23 8H22H10H9C9 4.13 12.13 1 16 1C19.87 1 23 4.13 23 8Z" fill="#72bba1"></path>
+                  <path d="M22 8V11C22 14.87 19 18 16 18C13 18 10 14.87 10 11V8H22Z" fill="#FFE6EA"></path>
+                  <path
+                    d="M1 31C1 31 1.687 27.379 2 26C2.208 25.083 3 23 11 22C11 22 12 25 16 25C20 25 21 22 21 22C29 23 29.792 25.021 30 26C30.294 27.384 31 31 31 31M10 11C10 14.866 13 18 16 18C19 18 22 14.866 22 11M8 30V31M24 30V31M6 8H23C23 4.134 19.866 1 16 1C12.134 1 9 4.134 9 8"
+                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_901_3019">
+                    <rect width="32" height="32" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </g>
+            </svg>
+            <!-- Icone de Pessoa-->
+
+          </div>
+          <div class="sobre-title">Eu</div>
+          <p class="sobre-desc">Me chamo Guilherme, tenho 20 anos e sou professor de robótica há quase um ano.
+            Sempre tive interesse por tecnologia e por entender como as coisas funcionam, o que me levou a ensinar
+            e compartilhar esse conhecimento. </p>
+          <div class="sobre-tags">
+            <span class="sobre-tag">Comunicação clara</span>
+            <span class="sobre-tag">Inteligência emocional</span>
+            <span class="sobre-tag">Adaptabilidade</span>
+          </div>
+        </div>
+        <div class="sobre-card" data-modal="academico" role="button" tabindex="0" aria-haspopup="dialog"
+          aria-label="Ver linha do tempo: Acadêmico">
+          <div class="sobre-icon" aria-hidden="true">
+
+            <!-- Icone Acadêmico-->
+            <svg width="30px" height="30px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M16.0003 2.99951L1.00031 10.9995L8.11031 14.7895L16.0003 18.9995L23.9803 14.7405L30.9993 10.9995L16.0003 2.99951Z"
+                  fill="#668077"></path>
+                <path
+                  d="M24 14.7497V23.9997C24 23.9997 21 26.9997 16 26.9997C11 26.9997 8 23.9997 8 23.9997V14.9997L8.11 14.7897L16 18.9997L23.98 14.7397L24 14.7497Z"
+                  fill="#668077"></path>
+                <path
+                  d="M16 11L24 14.75V29M8 19V24C8 24 11 27 16 27C18.022 27 19.719 26.644 21.021 26.059M1 11L16 3L31 11L16 19L1 11Z"
+                  stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </g>
+            </svg>
+            <!-- Icone de Acadêmico-->
+
+          </div>
+          <div class="sobre-title">Acadêmico</div>
+          <p class="sobre-desc">Sou formado como técnico em Desenvolvimento de Sistemas pela Etec e, atualmente, curso
+            graduação em Ciência da Computação.
+          </p>
+          <div class="sobre-tags">
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">Front-end</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">Html</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">CSS</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">Js</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">React</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">React-Native</span>
+
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">Back-end</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">Java</span>
+            <span class="sobre-tag" style="color:var(--accent2);background:var(--accent2-lt)">SQL</span>
+          </div>
+        </div>
+        <div class="sobre-card" data-modal="carreira" role="button" tabindex="0" aria-haspopup="dialog"
+          aria-label="Ver linha do tempo: Carreira">
+          <div class="sobre-icon" aria-hidden="true">
+
+            <!-- Icone de folhas-->
+            <svg width="30px" height="30px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g clip-path="url(#clip0_901_2684)">
+                  <path d="M31 4V26C31 26.55 30.55 27 30 27H26V8C26 7.45 25.55 7 25 7H21V3H30C30.55 3 31 3.45 31 4Z"
+                    fill="#668077"></path>
+                  <path
+                    d="M26 27V30C26 30.55 25.55 31 25 31H7C6.45 31 6 30.55 6 30V25V8C6 7.45 6.45 7 7 7H21H25C25.55 7 26 7.45 26 8V27Z"
+                    fill="#FFE6EA"></path>
+                  <path
+                    d="M21 3V7H7C6.45 7 6 7.45 6 8V25H2C1 25 1 24 1 24V2C1 1.45 1.45 1 2 1H20C20.55 1 21 1.45 21 2V3Z"
+                    fill="#b84dff"></path>
+                  <path
+                    d="M12 13H15M12 16H20M12 20H20M12 24H20M21 7V2C21 1.447 20.553 1 20 1H2C1.447 1 1 1.447 1 2V24C1 24 1 25 2 25H3M26 27H30C30.553 27 31 26.553 31 26V4C31 3.447 30.553 3 30 3H24M26 30C26 30.553 25.553 31 25 31H7C6.447 31 6 30.553 6 30V8C6 7.447 6.447 7 7 7H25C25.553 7 26 7.447 26 8V30Z"
+                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_901_2684">
+                    <rect width="32" height="32" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </g>
+            </svg>
+            <!-- Icone de folhas-->
+
+          </div>
+          <div class="sobre-title">Carreira</div>
+          <p class="sobre-desc">Atuei como voluntário na Etec, desempenhando um papel semelhante ao de estagiário,
+            prestando suporte na manutenção de computadores, instalação de programas e resolução de problemas técnicos
+            durante um semestre. Posteriormente, assumi a posição de professor de robótica em uma escola particular de
+            referência, função que exerço até o momento.</p>
+          <div class="sobre-tags">
+            <span class="sobre-tag" style="color:var(--accent3);background:var(--accent3-lt)">Assistente
+              técnico</span>
+            <span class="sobre-tag" style="color:var(--accent3);background:var(--accent3-lt)">Professor</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === SHOWCASE === -->
+  <section id="showcase">
+    <div class="showcase-sticky" id="showcaseSticky">
+      <div class="showcase-header">
+        <span class="section-label" id="showcase-label"> Projetos</span>
+        <h2 class="section-title" id="showcase-title">Explore o<br>Portfolio</h2>
+        <div class="section-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="carouselTrack">
+          <a href="https://github.com/DevGuiAfonso/Weather-App" target="_blank"
+            aria-label="Projeto: Sistema de Previsão do tempo" data-project="Sistema de Previsão do tempo"
+            rel="noopener noreferrer">
+            <div class="carousel-slide slide-1">
+              <div class="carousel-slide-bg"></div>
+              <div class="slide-shape" aria-hidden="true"></div>
+              <div class="carousel-slide-content">
+                <img src="assets/CapturaPrevisãoDoTempo.png" alt="previsão do tempo" class="img-projeto">
+                <span class="slide-number">01 / 04</span>
+                <div class="slide-title">Sistema de Previsão do tempo</div>
+                <div class="slide-sub">Moritoramento em tempo real</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/DevGuiAfonso/Xocolite" target="_blank" aria-label="Projeto: Xocolite" data-project="Xocolite" rel="noopener noreferrer">
+            <div class="carousel-slide slide-2">
+              <div class="carousel-slide-bg"></div>
+              <div class="slide-shape" aria-hidden="true"></div>
+              <div class="carousel-slide-content">
+                <img src="assets/CapturaXocoLite.png" alt="Xocolite" class="img-projeto">
+                <span class="slide-number">02 / 04</span>
+                <div class="slide-title">Xocolite</div>
+                <div class="slide-sub">O melhor chocolate do</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/DevGuiAfonso/VersaoFinalProjetoA3" target="_blank" aria-label="Projeto: CRUD Java" data-project="CRUD Java" rel="noopener noreferrer">
+            <div class="carousel-slide slide-3">
+              <div class="carousel-slide-bg"></div>
+              <div class="slide-shape" aria-hidden="true"></div>
+              <div class="carousel-slide-content">
+                <span class="slide-number">03 / 04</span>
+                <div class="slide-title">CRUD Java</div>
+                <div class="slide-sub">Primeiro projeto feito na faculdade</div>
+              </div>
+            </div>
+          </a>
+          <a href="https://github.com/DevGuiAfonso/Dagogo" target="_blank" aria-label="Projeto: Dagogo" data-project="Dagogo" rel="noopener noreferrer">
+            <div class="carousel-slide slide-4">
+              <div class="carousel-slide-bg"></div>
+              <div class="slide-shape" aria-hidden="true"></div>
+              <div class="carousel-slide-content">
+                <img src="assets/CapturaDagogo.PNG" alt="Dagogo" class="img-projeto">
+                <span class="slide-number">04 / 04</span>
+                <div class="slide-title">Dagogo</div>
+                <div class="slide-sub">Plataforma para ajudar crianaças especiais</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="carousel-progress" id="carouselProgress">
+        <div class="carousel-dot active"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+        <div class="carousel-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === cntt === -->
+  <section id="cntt">
+    <div class="cntt-container">
+      <div class="cntt-visual" aria-hidden="true">
+        <div class="cntt-inner">
+          <h2 class="cntt-title">Contatos</h2>
+          <p class="cntt-sub">Entre em contato</p>
+          <div class="hero-actions" style="opacity:1;transform:none">
+
+            <!--linkedin-->
+
+            <a href="https://www.linkedin.com/in/guilherme-afonso-de-ara%C3%BAjo-35b935333/" target="_blank"
+              rel="noopener noreferrer">
+              <button class="btn-ghost">
+                <svg width="30px" height="30px" viewBox="0 0 64.00 64.00" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  stroke="#000000" stroke-width="3.136">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <line x1="53" y1="56" x2="53" y2="32"></line>
+                    <line x1="23" y1="56" x2="23" y2="20"></line>
+                    <path d="M23 32c0-6.63 6.72-12 15-12s15 5.37 15 12"></path>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="11" y1="20" x2="11" y2="56"></line>
+                  </g>
+                </svg>
+              </button>
+            </a>
+
+
+            <!--WhatsApp-->
+
+            <a href="https://wa.me/5511912939683?text=Olá%20Gui,%20vi%20seu%20portfólio%20e%20quero%20conversar!"
+              target="_blank" aria-label="WhatsApp" data-social="WhatsApp" rel="noopener noreferrer">
+              <button class="btn-ghost">
+                <svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  stroke="#000000" stroke-width="0.00024000000000000003">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M17.6 6.31999C16.8669 5.58141 15.9943 4.99596 15.033 4.59767C14.0716 4.19938 13.0406 3.99622 12 3.99999C10.6089 4.00135 9.24248 4.36819 8.03771 5.06377C6.83294 5.75935 5.83208 6.75926 5.13534 7.96335C4.4386 9.16745 4.07046 10.5335 4.06776 11.9246C4.06507 13.3158 4.42793 14.6832 5.12 15.89L4 20L8.2 18.9C9.35975 19.5452 10.6629 19.8891 11.99 19.9C14.0997 19.9001 16.124 19.0668 17.6222 17.5816C19.1205 16.0965 19.9715 14.0796 19.99 11.97C19.983 10.9173 19.7682 9.87634 19.3581 8.9068C18.948 7.93725 18.3505 7.05819 17.6 6.31999ZM12 18.53C10.8177 18.5308 9.65701 18.213 8.64 17.61L8.4 17.46L5.91 18.12L6.57 15.69L6.41 15.44C5.55925 14.0667 5.24174 12.429 5.51762 10.8372C5.7935 9.24545 6.64361 7.81015 7.9069 6.80322C9.1702 5.79628 10.7589 5.28765 12.3721 5.37368C13.9853 5.4597 15.511 6.13441 16.66 7.26999C17.916 8.49818 18.635 10.1735 18.66 11.93C18.6442 13.6859 17.9355 15.3645 16.6882 16.6006C15.441 17.8366 13.756 18.5301 12 18.53ZM15.61 13.59C15.41 13.49 14.44 13.01 14.26 12.95C14.08 12.89 13.94 12.85 13.81 13.05C13.6144 13.3181 13.404 13.5751 13.18 13.82C13.07 13.96 12.95 13.97 12.75 13.82C11.6097 13.3694 10.6597 12.5394 10.06 11.47C9.85 11.12 10.26 11.14 10.64 10.39C10.6681 10.3359 10.6827 10.2759 10.6827 10.215C10.6827 10.1541 10.6681 10.0941 10.64 10.04C10.64 9.93999 10.19 8.95999 10.03 8.56999C9.87 8.17999 9.71 8.23999 9.58 8.22999H9.19C9.08895 8.23154 8.9894 8.25465 8.898 8.29776C8.8066 8.34087 8.72546 8.403 8.66 8.47999C8.43562 8.69817 8.26061 8.96191 8.14676 9.25343C8.03291 9.54495 7.98287 9.85749 8 10.17C8.0627 10.9181 8.34443 11.6311 8.81 12.22C9.6622 13.4958 10.8301 14.5293 12.2 15.22C12.9185 15.6394 13.7535 15.8148 14.58 15.72C14.8552 15.6654 15.1159 15.5535 15.345 15.3915C15.5742 15.2296 15.7667 15.0212 15.91 14.78C16.0428 14.4856 16.0846 14.1583 16.03 13.84C15.94 13.74 15.81 13.69 15.61 13.59Z"
+                      fill="#000000"></path>
+                  </g>
+                </svg>
+              </button>
+            </a>
+
+
+            <!--Email-->
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dev.guilherme.afonso@gmail.com&su=Email vindo do Portfólio&body=Olá%20Gui,%20gostaria%20de%20falar%20sobre..."
+              target="_blank" aria-label="Gmail" data-social="Gmail" rel="noopener noreferrer">
+              <button class="btn-ghost">
+                <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M19 4.25H5C4.53668 4.25263 4.09309 4.43784 3.76546 4.76546C3.43784 5.09309 3.25263 5.53668 3.25 6V18C3.25263 18.4633 3.43784 18.9069 3.76546 19.2345C4.09309 19.5622 4.53668 19.7474 5 19.75H19C19.4633 19.7474 19.9069 19.5622 20.2345 19.2345C20.5622 18.9069 20.7474 18.4633 20.75 18V6C20.7474 5.53668 20.5622 5.09309 20.2345 4.76546C19.9069 4.43784 19.4633 4.25263 19 4.25ZM5 5.75H19C19.0663 5.75 19.1299 5.77634 19.1768 5.82322C19.2237 5.87011 19.25 5.9337 19.25 6V7.54L12 11.16L4.75 7.54V6C4.75 5.9337 4.77634 5.87011 4.82322 5.82322C4.87011 5.77634 4.9337 5.75 5 5.75ZM19 18.25H5C4.9337 18.25 4.87011 18.2237 4.82322 18.1768C4.77634 18.1299 4.75 18.0663 4.75 18V9.21L11.66 12.67C11.7656 12.7228 11.882 12.7503 12 12.7503C12.118 12.7503 12.2344 12.7228 12.34 12.67L19.25 9.21V18C19.25 18.0663 19.2237 18.1299 19.1768 18.1768C19.1299 18.2237 19.0663 18.25 19 18.25Z"
+                      fill="#000000"></path>
+                  </g>
+                </svg>
+              </button>
+            </a>
+
+
+            <!--GitHub-->
+            <a href="https://github.com/DevGuiAfonso" target="_blank" aria-label="Github" data-social="Github"
+              rel="noopener noreferrer">
+              <button class="btn-ghost">
+                <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M9.29183 21V18.4407L9.3255 16.6219C9.36595 16.0561 9.58639 15.5228 9.94907 15.11C9.95438 15.1039 9.95972 15.0979 9.9651 15.0919C9.9791 15.0763 9.96988 15.0511 9.94907 15.0485V15.0485C7.52554 14.746 5.0005 13.7227 5.0005 9.26749C4.9847 8.17021 5.3427 7.10648 6.00437 6.27215C6.02752 6.24297 6.05103 6.21406 6.07492 6.18545V6.18545C6.10601 6.1482 6.11618 6.09772 6.10194 6.05134C6.10107 6.04853 6.10021 6.04571 6.09935 6.04289C6.0832 5.9899 6.06804 5.93666 6.05388 5.88321C5.81065 4.96474 5.86295 3.98363 6.20527 3.09818C6.20779 3.09164 6.21034 3.08511 6.2129 3.07858C6.22568 3.04599 6.25251 3.02108 6.28698 3.01493V3.01493C6.50189 2.97661 7.37036 2.92534 9.03298 4.07346C9.08473 4.10919 9.13724 4.14609 9.19053 4.18418V4.18418C9.22901 4.21168 9.27794 4.22011 9.32344 4.20716C9.32487 4.20675 9.32631 4.20634 9.32774 4.20593C9.41699 4.18056 9.50648 4.15649 9.59617 4.1337C11.1766 3.73226 12.8234 3.73226 14.4038 4.1337C14.4889 4.1553 14.5737 4.17807 14.6584 4.20199C14.6602 4.20252 14.6621 4.20304 14.6639 4.20356C14.7174 4.21872 14.7749 4.20882 14.8202 4.17653V4.17653C14.8698 4.14114 14.9187 4.10679 14.967 4.07346C16.6257 2.92776 17.4894 2.9764 17.7053 3.01469V3.01469C17.7404 3.02092 17.7678 3.04628 17.781 3.07946C17.7827 3.08373 17.7843 3.08799 17.786 3.09226C18.1341 3.97811 18.1894 4.96214 17.946 5.88321C17.9315 5.93811 17.9159 5.9928 17.8993 6.04723V6.04723C17.8843 6.09618 17.8951 6.14942 17.9278 6.18875C17.9289 6.18998 17.9299 6.19121 17.9309 6.19245C17.9528 6.21877 17.9744 6.24534 17.9956 6.27215C18.6573 7.10648 19.0153 8.17021 18.9995 9.26749C18.9995 13.747 16.4565 14.7435 14.0214 15.015V15.015C14.0073 15.0165 14.001 15.0334 14.0105 15.0439C14.0141 15.0479 14.0178 15.0519 14.0214 15.0559C14.2671 15.3296 14.4577 15.6544 14.5811 16.0103C14.7101 16.3824 14.7626 16.7797 14.7351 17.1754V21"
+                      stroke="#000000" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                      d="M4 17C4.36915 17.0523 4.72159 17.1883 5.03065 17.3975C5.3397 17.6068 5.59726 17.8838 5.7838 18.2078C5.94231 18.4962 6.15601 18.7504 6.41264 18.9557C6.66927 19.161 6.96379 19.3135 7.27929 19.4043C7.59478 19.4952 7.92504 19.5226 8.25112 19.485C8.5772 19.4475 8.89268 19.3457 9.17946 19.1855"
+                      stroke="#000000" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+              </button>
+            </a>
+
+          </div>
+        </div>
+      </div>
+      <div class="cntt-text">
+        <span class="section-label">Você aqui?</span>
+        <h2 class="section-title">Muito obrigado por chegar até aqui!</h2>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- === FOOTER === -->
+  <footer>
+    <span class="footer-logo">GuiAfonso</span>
+    <div class="footer-links">
+      <a href="https://wa.me/5511912939683?text=Olá%20Gui,%20vi%20seu%20portfólio%20e%20quero%20conversar!"
+        target="_blank" aria-label="WhatsApp" data-social="WhatsApp" rel="noopener noreferrer">WhatsApp</a>
+
+      <a href="https://github.com/DevGuiAfonso/Meu_Portfolio" target="_blank" aria-label="Github" data-social="Github"
+        rel="noopener noreferrer">Github</a>
+
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=dev.guilherme.afonso@gmail.com&su=Email vindo do Portfólio&body=Olá%20Gui,%20gostaria%20de%20falar%20sobre..."
+        target="_blank" aria-label="Gmail" data-social="Gmail" rel="noopener noreferrer">Email</a>
+
+      <a href="https://www.linkedin.com/in/guilherme-afonso-de-ara%C3%BAjo-35b935333/" target="_blank"
+        rel="noopener noreferrer">LinkedIn</a>
+
+    </div>
+    <span>© 2026 Portfólio. Todos os direitos reservados pra Euuuu.</span>
+  </footer>
+
+  <!-- ═══ MODAL ═══ -->
+  <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title-text">
+    <div class="modal-box" id="modalBox">
+      <!-- Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div id="modalIcon" aria-hidden="true"></div>
+          <div class="modal-title-wrap">
+            <span class="modal-label" id="modalLabel">Linha do tempo</span>
+            <div class="modal-title" id="modal-title-text"></div>
+          </div>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Fechar modal">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <!-- Tags -->
+      <div class="modal-tags" id="modalTags"></div>
+      <!-- Timeline body -->
+      <div class="modal-body">
+        <div class="timeline" id="modalTimeline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script src="/Js/App.js"></script>
+  <script src="/Js/hw.js"></script>
 </body>
 
 </html>
